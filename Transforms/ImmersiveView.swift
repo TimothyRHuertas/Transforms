@@ -10,10 +10,7 @@ import RealityKit
 import RealityKitContent
 
 struct ImmersiveView: View {
-    @State private var baseYaw: Float = 0
-    @State private var yaw: Float = 0
-    @State private var basePitch: Float = 0
-    @State private var pitch: Float = 0
+
     @State private var gizmo:Entity?
     
     func buildCylinder(_ height:Float, _ color: UIColor) -> Entity {
@@ -31,8 +28,8 @@ struct ImmersiveView: View {
         
         entity.components.set(InputTargetComponent())
         entity.generateCollisionShapes(recursive: true)
-
         entity.components.set(CollisionComponent(shapes: entity.collision!.shapes))
+        entity.components.set(DragRotateComponent())
 
         return entity
     }
@@ -59,14 +56,6 @@ struct ImmersiveView: View {
         return sphere
     }
     
-    private func spin(
-        displacement: Float,
-        base: Float
-    ) -> Float {
-        let sensitivity:Float = 10
-        return base + displacement * sensitivity
-    }
-    
     var body: some View {
         RealityView { content in
             gizmo = buildGizmo(.gray)
@@ -80,29 +69,7 @@ struct ImmersiveView: View {
         .gesture(DragGesture(minimumDistance: 0.0)
             .targetedToAnyEntity()
             .onChanged { value in
-                print("TImmy")
-                // Find the current linear displacement.
-                let location3D = value.convert(value.location3D, from: .local, to: .scene)
-                let startLocation3D = value.convert(value.startLocation3D, from: .local, to: .scene)
-                let delta = location3D - startLocation3D
-
-                yaw = spin(displacement: delta.x, base: baseYaw)
-                pitch = spin(displacement: delta.y, base: basePitch)
-//                gizmo!.transform.rotation = simd_quatf(vector: [pitch, 0, 0, 0])
-                
-                gizmo!.transform.rotation = simd_quatf(.init(angle: .radians(Double(-pitch)), axis: .x)) * simd_quatf(.init(angle: .radians(Double(yaw)), axis: .y))
-//                gizmo!.transform.rotation = simd_quatf(.init(angle: .radians(Double(yaw)), axis: .y))
-
-
-                print(yaw, pitch, gizmo!.transform.rotation)
-                // Use an interactive spring animation that becomes
-                // a spring animation when the gesture ends below.
-//                withAnimation(.interactiveSpring) {
-//                    yaw = spin(displacement: Double(delta.x), base: baseYaw, limit: yawLimit)
-//                    pitch = spin(displacement: Double(delta.y), base: basePitch, limit: pitchLimit)
-//                }
-                
-                
+                value.entity.components[DragRotateComponent.self]?.dragGesture = value
             }
         )
     }

@@ -9,6 +9,11 @@ import SwiftUI
 
 @main
 struct TransformsApp: App {
+    init() {
+        DragRotateComponent.registerComponent()
+        DragRotateSystem.registerSystem()
+    }
+    
     var body: some Scene {
         WindowGroup(id: "ContentView") {
             ContentView()
