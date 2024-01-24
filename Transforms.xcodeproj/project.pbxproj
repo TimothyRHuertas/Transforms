@@ -14,6 +14,7 @@
 		598D45D12B61A7AE00B17C95 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 598D45D02B61A7AE00B17C95 /* Assets.xcassets */; };
 		598D45D42B61A7AE00B17C95 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 598D45D32B61A7AE00B17C95 /* Preview Assets.xcassets */; };
 		598D45DF2B61A7AF00B17C95 /* TransformsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 598D45DE2B61A7AF00B17C95 /* TransformsTests.swift */; };
+		59FE155D2B61BB3D0083F7EE /* DragRotationModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59FE155C2B61BB3D0083F7EE /* DragRotationModifier.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -37,6 +38,7 @@
 		598D45D52B61A7AE00B17C95 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		598D45DA2B61A7AF00B17C95 /* TransformsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TransformsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		598D45DE2B61A7AF00B17C95 /* TransformsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransformsTests.swift; sourceTree = "<group>"; };
+		59FE155C2B61BB3D0083F7EE /* DragRotationModifier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DragRotationModifier.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -80,6 +82,7 @@
 		598D45C52B61A7AB00B17C95 /* Transforms */ = {
 			isa = PBXGroup;
 			children = (
+				59FE155B2B61BB130083F7EE /* Modifiers */,
 				598D45CA2B61A7AB00B17C95 /* TransformsApp.swift */,
 				598D45CC2B61A7AB00B17C95 /* ContentView.swift */,
 				598D45CE2B61A7AB00B17C95 /* ImmersiveView.swift */,
@@ -112,6 +115,14 @@
 				598D45DE2B61A7AF00B17C95 /* TransformsTests.swift */,
 			);
 			path = TransformsTests;
+			sourceTree = "<group>";
+		};
+		59FE155B2B61BB130083F7EE /* Modifiers */ = {
+			isa = PBXGroup;
+			children = (
+				59FE155C2B61BB3D0083F7EE /* DragRotationModifier.swift */,
+			);
+			path = Modifiers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -219,6 +230,7 @@
 			files = (
 				598D45CD2B61A7AB00B17C95 /* ContentView.swift in Sources */,
 				598D45CB2B61A7AB00B17C95 /* TransformsApp.swift in Sources */,
+				59FE155D2B61BB3D0083F7EE /* DragRotationModifier.swift in Sources */,
 				598D45CF2B61A7AB00B17C95 /* ImmersiveView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
