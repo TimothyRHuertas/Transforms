@@ -10,7 +10,7 @@ import SwiftUI
 @main
 struct TransformsApp: App {
     var body: some Scene {
-        WindowGroup {
+        WindowGroup(id: "ContentView") {
             ContentView()
         }
 

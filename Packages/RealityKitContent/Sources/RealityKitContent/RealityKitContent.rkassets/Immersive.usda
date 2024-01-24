@@ -26,6 +26,9 @@ def Xform "Root"
     def Sphere "Sphere_Left" (
         active = true
         prepend apiSchemas = ["MaterialBindingAPI"]
+        customData = {
+            float3 rotationEulerHint = (0, 0, 0)
+        }
     )
     {
         rel material:binding = </Root/GridMaterial/GridMaterial> (
