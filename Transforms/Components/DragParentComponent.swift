@@ -10,8 +10,8 @@ import SwiftUI
 
 
 public struct DragParentComponent: Component {
-    var dragGesture: EntityTargetValue<DragGesture.Value>?
     var axis: Axis3D
+    var delta: Vector3D?
     
     public init(axis: Axis3D) {
         self.axis = axis

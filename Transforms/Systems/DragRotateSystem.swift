@@ -29,8 +29,6 @@ public struct DragRotateSystem: System {
 
                 entity.transform.rotation = simd_quatf(.init(angle: .radians(Double(-pitch)), axis: .x)) * simd_quatf(.init(angle: .radians(Double(yaw)), axis: .y))
                 
-//                entity.transform.rotation = simd_quatf(.init(angle: .radians(Double(yaw)), axis: .y))
-
                 entity.components[DragRotateComponent.self]?.dragGesture = nil
                 entity.components[DragRotateComponent.self]?.baseYaw = yaw
                 entity.components[DragRotateComponent.self]?.basePitch = pitch
