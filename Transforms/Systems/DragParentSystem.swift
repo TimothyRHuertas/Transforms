@@ -21,14 +21,27 @@ public struct DragParentSystem: System {
 
         for entity in entities {
             if let component = entity.components[DragParentComponent.self], let delta = component.delta, let parent = entity.parent {
-                let difference =  normalize(entity.position(relativeTo: nil) - parent.position(relativeTo: nil))
-                let deltaSum = Float(normalize(delta).sum())
-                let diffrenceSum = difference.sum()
-                let deltaDifferenceProduct = diffrenceSum * deltaSum
-                let axisMultiplier:Float = (deltaDifferenceProduct > 0) ? 1 : -1
-    
-                parent.position += difference * sensitivity * axisMultiplier
-                entity.components[DragParentComponent.self]?.delta = nil
+                let matrixCols = parent.transformMatrix(relativeTo: nil).columns
+                // This also works
+                // let difference =  normalize(entity.position(relativeTo: nil) - parent.position(relativeTo: nil))
+                // but I want o make sure I'm using the transforms
+                let difference:simd_float3? = switch component.axis {
+                    case .x: simd_make_float3(matrixCols.0)
+                    case .y: simd_make_float3(matrixCols.1)
+                    case.z: simd_make_float3(matrixCols.2)
+                    default:nil
+                }
+                
+                if let difference = difference {
+                    let deltaSum = Float(normalize(delta).sum())
+                    let diffrenceSum = difference.sum()
+                    let deltaDifferenceProduct = diffrenceSum * deltaSum
+                    let axisMultiplier:Float = (deltaDifferenceProduct > 0) ? 1 : -1
+                        
+                    parent.position += difference * sensitivity * axisMultiplier
+                    entity.components[DragParentComponent.self]?.delta = nil
+                }
+                
             }
             
         }

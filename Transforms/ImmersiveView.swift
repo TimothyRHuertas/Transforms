@@ -68,7 +68,12 @@ struct ImmersiveView: View {
             let gizmo = buildGizmo(.gray)
             gizmo.position = [0, 1.8, -2]
             content.add(gizmo)
-            print("matrix cols", gizmo.transformMatrix(relativeTo: gizmo.parent).columns)            
+            
+            let gizmo2 = buildGizmo(.orange)
+            gizmo2.position = [1, 1.8, -2]
+            content.add(gizmo2)
+            
+            print("matrix cols", gizmo.transformMatrix(relativeTo: gizmo.parent).columns)
         }
         .gesture(DragGesture(minimumDistance: 0.0)
             .targetedToAnyEntity()
