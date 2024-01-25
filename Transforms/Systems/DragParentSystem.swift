@@ -25,19 +25,8 @@ public struct DragParentSystem: System {
                 let deltaSum = Float(normalize(delta).sum())
                 let diffrenceSum = difference.sum()
                 let deltaDifferenceProduct = diffrenceSum * deltaSum
-                
-                var axisMultiplier:Float = 1.0
-                
-                print(deltaDifferenceProduct)
-                if(component.axis == .y) {
-                    if(deltaDifferenceProduct > 0) {
-                        axisMultiplier = -1.0
-                    }
-                }
-                else if(deltaDifferenceProduct < 0) {
-                    axisMultiplier = -1.0
-                }
-                
+                let axisMultiplier:Float = (deltaDifferenceProduct > 0) ? 1 : -1
+    
                 parent.position += difference * sensitivity * axisMultiplier
                 entity.components[DragParentComponent.self]?.delta = nil
             }

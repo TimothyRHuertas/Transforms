@@ -76,7 +76,7 @@ struct ImmersiveView: View {
                 var delta = simd_double3.zero
                 
                 if let previousDragLocation = previousDragLocation {
-                    delta = (value.location3D.vector - previousDragLocation)
+                    delta = (previousDragLocation - value.location3D.vector) * simd_double3(-1, 1, -1)
                 }
                 previousDragLocation = value.location3D.vector
                 
