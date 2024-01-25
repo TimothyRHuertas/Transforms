@@ -28,7 +28,7 @@ public struct DragParentSystem: System {
                 let difference:simd_float3? = switch component.axis {
                     case .x: simd_make_float3(matrixCols.0)
                     case .y: simd_make_float3(matrixCols.1)
-                    case.z: simd_make_float3(matrixCols.2)
+                    case .z: simd_make_float3(matrixCols.2)
                     default:nil
                 }
                 
