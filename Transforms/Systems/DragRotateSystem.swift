@@ -10,7 +10,7 @@ import RealityKit
 
 public struct DragRotateSystem: System {
     static let query = EntityQuery(where: .has(DragRotateComponent.self))
-    let sensitivity:Float = 10
+    let sensitivity:Float = 0.4
 
     public init(scene: RealityKit.Scene) {
     }
@@ -24,13 +24,16 @@ public struct DragRotateSystem: System {
                 let location3D = dragGesture.convert(dragGesture.location3D, from: .local, to: .scene)
                 let startLocation3D = dragGesture.convert(dragGesture.startLocation3D, from: .local, to: .scene)
                 let delta = location3D - startLocation3D
-
-                let yaw = delta.x * sensitivity
-                let pitch = delta.y * sensitivity
+                let yaw = component.baseYaw + delta.x * sensitivity
+                let pitch = component.basePitch + delta.y * sensitivity
 
                 entity.transform.rotation = simd_quatf(.init(angle: .radians(Double(-pitch)), axis: .x)) * simd_quatf(.init(angle: .radians(Double(yaw)), axis: .y))
                 
+//                entity.transform.rotation = simd_quatf(.init(angle: .radians(Double(yaw)), axis: .y))
+
                 entity.components[DragRotateComponent.self]?.dragGesture = nil
+                entity.components[DragRotateComponent.self]?.baseYaw = yaw
+                entity.components[DragRotateComponent.self]?.basePitch = pitch
             }
             
         }

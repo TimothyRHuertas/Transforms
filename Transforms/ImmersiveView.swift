@@ -77,7 +77,7 @@ struct ImmersiveView: View {
             }
             .onEnded {
                 value in
-                value.entity.components[DragRotateComponent.self]?.dragGesture = nil
+                value.entity.components[DragRotateComponent.self]?.dragGesture = nil                
                 value.entity.components[DragParentComponent.self]?.dragGesture = nil
             }
         )

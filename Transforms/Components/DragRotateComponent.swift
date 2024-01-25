@@ -5,6 +5,8 @@ import SwiftUI
 
 public struct DragRotateComponent: Component {
     var dragGesture: EntityTargetValue<DragGesture.Value>?
+    var baseYaw:Float = 0
+    var basePitch:Float = 0
     
     public init() {
     }
