@@ -21,22 +21,18 @@ public struct DragParentSystem: System {
 
         for entity in entities {
             if let component = entity.components[DragParentComponent.self], let delta = component.delta, let parent = entity.parent {
+                let difference =  entity.position(relativeTo: nil) - parent.position(relativeTo: nil)
+                let deltaSum = component.axis == .y ? -delta.vector.sum() : delta.vector.sum()
                 
-                switch component.axis {
-                    case .x:
-                    parent.position.x += Float(delta.x) * sensitivity
-                        break
-                    case .y:
-                    parent.position.y -= Float(delta.y) * sensitivity
-                        break
-                    case .z:
-                    parent.position.z += Float(delta.y) * sensitivity
-                        break
-                    default:
-                        print("oops")
+                print(difference.sum(), delta.vector.sum())
+                
+                if(deltaSum > 0) {
+                    parent.position += difference * 0.1
                 }
-                
-                                
+                else  {
+                    parent.position -= difference * 0.1
+                }
+
                 entity.components[DragParentComponent.self]?.delta = nil
             }
             

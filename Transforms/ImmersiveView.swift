@@ -33,19 +33,19 @@ struct ImmersiveView: View {
     
     private func buildGizmo(_ color:UIColor) -> Entity {
         let sphere = buildSphere(0.1, color)
-        
         let lineLength:Float = 0.5
         let lineOffset:Float = lineLength/2
-        let lineY = buildCylinder(lineLength, .red)
-        lineY.position.y = lineOffset
-        lineY.components[DragParentComponent.self] = DragParentComponent(axis: .y)
-        sphere.addChild(lineY)
         
-        let lineX = buildCylinder(lineLength, .green)
+        let lineX = buildCylinder(lineLength, .red)
         lineX.position.x = lineOffset
         lineX.transform.rotation = simd_quatf(.init(angle: .degrees(90.0), axis: .z))
         lineX.components[DragParentComponent.self] = DragParentComponent(axis: .x)
         sphere.addChild(lineX)
+        
+        let lineY = buildCylinder(lineLength, .green)
+        lineY.position.y = lineOffset
+        lineY.components[DragParentComponent.self] = DragParentComponent(axis: .y)
+        sphere.addChild(lineY)
         
         let lineZ = buildCylinder(lineLength, .blue)
         lineZ.position.z = lineOffset
