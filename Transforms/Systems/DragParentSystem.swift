@@ -22,7 +22,7 @@ public struct DragParentSystem: System {
         for entity in entities {
             if let component = entity.components[DragParentComponent.self], let delta = component.delta, let parent = entity.parent {
                 let difference =  normalize(entity.position(relativeTo: nil) - parent.position(relativeTo: nil))
-                let deltaSum = Float(normalize(delta.vector).sum())
+                let deltaSum = Float(normalize(delta).sum())
                 let diffrenceSum = difference.sum()
                 let deltaDifferenceProduct = diffrenceSum * deltaSum
                 
