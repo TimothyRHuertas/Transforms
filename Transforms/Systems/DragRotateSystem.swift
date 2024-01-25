@@ -17,7 +17,7 @@ public struct DragRotateSystem: System {
     
     public func update(context: SceneUpdateContext) {
         let scene = context.scene
-        let entities = scene.performQuery(Self.query)
+        let entities = scene.performQuery(Self.query).filter({$0.components[DragRotateComponent.self]?.dragGesture != nil})
 
         for entity in entities {
             if let component = entity.components[DragRotateComponent.self], let dragGesture = component.dragGesture {
@@ -29,6 +29,8 @@ public struct DragRotateSystem: System {
                 let pitch = delta.y * sensitivity
 
                 entity.transform.rotation = simd_quatf(.init(angle: .radians(Double(-pitch)), axis: .x)) * simd_quatf(.init(angle: .radians(Double(yaw)), axis: .y))
+                
+                entity.components[DragRotateComponent.self]?.dragGesture = nil
             }
             
         }

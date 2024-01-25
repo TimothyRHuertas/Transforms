@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Bucket
+   uuid = "C97BB234-6013-48A6-87B7-810C210E7E96"
+   type = "1"
+   version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "A1BC5194-E02F-414B-AA56-8FE7D1064B80"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Transforms/Systems/DragParentSystem.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "26"
+            endingLineNumber = "26"
+            landmarkName = "update(context:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "444E104A-26E1-4B38-B61F-E09BC5CC42C1"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Transforms/Systems/DragParentSystem.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "22"
+            endingLineNumber = "22"
+            landmarkName = "update(context:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "444E104A-26E1-4B38-B61F-E09BC5CC42C1 - 190a78d6fd1c3f6"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Transforms.DragParentSystem.update(context: RealityFoundation.SceneUpdateContext) -&gt; ()"
+                  moduleName = "Transforms"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/timothyhuertas/workspace/Transforms/Transforms/Systems/DragParentSystem.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "23"
+                  endingLineNumber = "23"
+                  offsetFromSymbolStart = "1312">
+               </Location>
+               <Location
+                  uuid = "444E104A-26E1-4B38-B61F-E09BC5CC42C1 - 190a78d6fd1c3f6"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Transforms.DragParentSystem.update(context: RealityFoundation.SceneUpdateContext) -&gt; ()"
+                  moduleName = "Transforms"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/timothyhuertas/workspace/Transforms/Transforms/Systems/DragParentSystem.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "23"
+                  endingLineNumber = "23"
+                  offsetFromSymbolStart = "1524">
+               </Location>
+               <Location
+                  uuid = "444E104A-26E1-4B38-B61F-E09BC5CC42C1 - 190a78d6fd1c3f6"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Transforms.DragParentSystem.update(context: RealityFoundation.SceneUpdateContext) -&gt; ()"
+                  moduleName = "Transforms"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/timothyhuertas/workspace/Transforms/Transforms/Systems/DragParentSystem.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "23"
+                  endingLineNumber = "23"
+                  offsetFromSymbolStart = "1624">
+               </Location>
+               <Location
+                  uuid = "444E104A-26E1-4B38-B61F-E09BC5CC42C1 - 190a78d6fd1c3f6"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Transforms.DragParentSystem.update(context: RealityFoundation.SceneUpdateContext) -&gt; ()"
+                  moduleName = "Transforms"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/timothyhuertas/workspace/Transforms/Transforms/Systems/DragParentSystem.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "23"
+                  endingLineNumber = "23"
+                  offsetFromSymbolStart = "1732">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
+</Bucket>
