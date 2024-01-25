@@ -14,7 +14,7 @@ struct ImmersiveView: View {
     
     private func buildCylinder(_ height:Float, _ color: UIColor) -> Entity {
         let material = UnlitMaterial.init(color: color)
-        let mesh = MeshResource.generateCylinder(height: height, radius: 0.01)
+        let mesh = MeshResource.generateCylinder(height: height, radius: 0.02)
         let entity = ModelEntity(mesh: mesh, materials: [material])
         makeDragable(entity)
         
