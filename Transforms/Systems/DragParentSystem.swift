@@ -57,7 +57,7 @@ public struct DragParentSystem: System {
                             print("zy", delta.y,  difference.z)
                         }
                         else {
-                            if(delta.y * difference.y < 0) {
+                            if(delta.y * difference.z < 0) {
                                 axisMultiplier = -1
                             }
                             print("zz", delta.y,  difference.z)
