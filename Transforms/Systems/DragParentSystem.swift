@@ -32,17 +32,19 @@ public struct DragParentSystem: System {
                     default:nil
                 }
                 
+                let deltaSum = normalize(delta).sum()
+                
                 if let difference = difference {
                     var axisMultiplier:Float = 1
                     
                     if(abs(difference.x) == abs(difference).max()) {
-                        if(delta.x * difference.x < 0) {
+                        if(deltaSum * difference.x < 0) {
                             axisMultiplier = -1
                         }
                         print("x", delta.x, difference.x)
                     }
                     else if(abs(difference.y) == abs(difference).max()) {
-                        if(delta.y * difference.y < 0) {
+                        if(deltaSum * difference.y < 0) {
                             axisMultiplier = -1
                         }
                         
