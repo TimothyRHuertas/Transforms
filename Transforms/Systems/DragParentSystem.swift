@@ -57,7 +57,8 @@ public struct DragParentSystem: System {
                             print("zy", delta.y,  difference.z)
                         }
                         else {
-                            if(delta.y * difference.y < 0 ) {
+                            let diffY:Float = difference.y == 0 ? 1 : difference.y
+                            if(delta.y * diffY < 0 ) {
                                 axisMultiplier = -1
                             }
                             print("zy", delta.y,  difference, axisMultiplier)
