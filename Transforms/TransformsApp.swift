@@ -15,6 +15,9 @@ struct TransformsApp: App {
         
         DragParentComponent.registerComponent()
         DragParentSystem.registerSystem()
+        
+        DragTransformComponent.registerComponent()
+        DragTransformSystem.registerSystem()
     }
     
     var body: some Scene {
