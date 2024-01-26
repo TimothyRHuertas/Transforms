@@ -10,7 +10,6 @@ import RealityKit
 import RealityKitContent
 
 struct ImmersiveView: View {
-    @State private var previousDragLocation:simd_float3?
     
     private func buildCylinder(_ height:Float, _ color: UIColor) -> Entity {
         let material = SimpleMaterial.init(color: color, isMetallic: true)
@@ -73,25 +72,8 @@ struct ImmersiveView: View {
             gizmo2.position = [1, 1.8, -2]
             content.add(gizmo2)            
         }
-        .gesture(DragGesture(minimumDistance: 0.0)
-            .targetedToAnyEntity()
-            .onChanged { value in
-                let location3D = value.convert(value.location3D, from: .local, to: .scene)
-                
-                if let previousDragLocation = previousDragLocation {
-                    value.entity.components[DragParentComponent.self]?.delta = location3D - previousDragLocation
-                }
-                
-                previousDragLocation = location3D
-                value.entity.components[DragRotateComponent.self]?.dragGesture = value
-            }
-            .onEnded {
-                value in
-                value.entity.components[DragRotateComponent.self]?.dragGesture = nil                
-                value.entity.components[DragParentComponent.self]?.delta = nil
-                previousDragLocation = nil
-            }
-        )
+        .dragRotation()
+        .dragParent()
     }
 }
 

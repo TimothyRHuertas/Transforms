@@ -34,6 +34,7 @@ public struct DragParentSystem: System {
                 
                 let deltaSum = normalize(delta).sum()
                 
+                // Leaving this way so I can debug later
                 if let difference = difference {
                     var axisMultiplier:Float = 1
                     
@@ -41,20 +42,16 @@ public struct DragParentSystem: System {
                         if(deltaSum * difference.x < 0) {
                             axisMultiplier = -1
                         }
-                        print("x", delta.x, difference.x)
                     }
                     else if(abs(difference.y) == abs(difference).max()) {
                         if(deltaSum * difference.y < 0) {
                             axisMultiplier = -1
                         }
-                        
-                        print("y", delta.y, difference.y)
-                    }
+                                            }
                     else if(abs(difference.z) == abs(difference).max()) {
                         if(delta.z * difference.z < 0) {
                             axisMultiplier = -1
                         }
-                        print("zz", delta.z,  difference.z)
                     }
                                         
                     parent.position += difference * sensitivity * axisMultiplier

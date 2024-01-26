@@ -18,6 +18,8 @@
 		59FE15942B61D1B00083F7EE /* DragRotateComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59FE15932B61D1B00083F7EE /* DragRotateComponent.swift */; };
 		59FE15962B61D97C0083F7EE /* DragParentComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59FE15952B61D97C0083F7EE /* DragParentComponent.swift */; };
 		59FE15982B61D9AF0083F7EE /* DragParentSystem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59FE15972B61D9AF0083F7EE /* DragParentSystem.swift */; };
+		59FE159F2B642F820083F7EE /* DragRotationModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59FE159E2B642F820083F7EE /* DragRotationModifier.swift */; };
+		59FE15A12B6432010083F7EE /* DragParentModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59FE15A02B6432010083F7EE /* DragParentModifier.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -45,6 +47,8 @@
 		59FE15932B61D1B00083F7EE /* DragRotateComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DragRotateComponent.swift; sourceTree = "<group>"; };
 		59FE15952B61D97C0083F7EE /* DragParentComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DragParentComponent.swift; sourceTree = "<group>"; };
 		59FE15972B61D9AF0083F7EE /* DragParentSystem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DragParentSystem.swift; sourceTree = "<group>"; };
+		59FE159E2B642F820083F7EE /* DragRotationModifier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DragRotationModifier.swift; sourceTree = "<group>"; };
+		59FE15A02B6432010083F7EE /* DragParentModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DragParentModifier.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -88,6 +92,7 @@
 		598D45C52B61A7AB00B17C95 /* Transforms */ = {
 			isa = PBXGroup;
 			children = (
+				59FE159D2B642F440083F7EE /* Modifiers */,
 				59FE15902B61D1750083F7EE /* Components */,
 				59FE158F2B61D16D0083F7EE /* Systems */,
 				598D45CA2B61A7AB00B17C95 /* TransformsApp.swift */,
@@ -140,6 +145,15 @@
 				59FE15952B61D97C0083F7EE /* DragParentComponent.swift */,
 			);
 			path = Components;
+			sourceTree = "<group>";
+		};
+		59FE159D2B642F440083F7EE /* Modifiers */ = {
+			isa = PBXGroup;
+			children = (
+				59FE159E2B642F820083F7EE /* DragRotationModifier.swift */,
+				59FE15A02B6432010083F7EE /* DragParentModifier.swift */,
+			);
+			path = Modifiers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -247,10 +261,12 @@
 			files = (
 				598D45CD2B61A7AB00B17C95 /* ContentView.swift in Sources */,
 				59FE15922B61D1910083F7EE /* DragRotateSystem.swift in Sources */,
+				59FE159F2B642F820083F7EE /* DragRotationModifier.swift in Sources */,
 				598D45CB2B61A7AB00B17C95 /* TransformsApp.swift in Sources */,
 				59FE15962B61D97C0083F7EE /* DragParentComponent.swift in Sources */,
 				59FE15942B61D1B00083F7EE /* DragRotateComponent.swift in Sources */,
 				59FE15982B61D9AF0083F7EE /* DragParentSystem.swift in Sources */,
+				59FE15A12B6432010083F7EE /* DragParentModifier.swift in Sources */,
 				598D45CF2B61A7AB00B17C95 /* ImmersiveView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
