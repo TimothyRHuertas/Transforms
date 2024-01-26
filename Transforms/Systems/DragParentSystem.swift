@@ -6,13 +6,27 @@
 //
 
 import RealityKit
-
+import ARKit
+import SwiftUI
 
 public struct DragParentSystem: System {
     static let query = EntityQuery(where: .has(DragParentComponent.self))
     let sensitivity:Float =  0.05
-    
+    private let arkitSession = ARKitSession()
+    private let worldTrackingProvider = WorldTrackingProvider()
+
     public init(scene: RealityKit.Scene) {
+        setUpSession()
+    }
+    
+    func setUpSession() {
+        Task {
+            do {
+                try await arkitSession.run([worldTrackingProvider])
+            } catch {
+                print("Error: \(error)")
+            }
+        }
     }
     
     public func update(context: SceneUpdateContext) {
@@ -34,8 +48,8 @@ public struct DragParentSystem: System {
                 
                 if let difference = difference {
                     var axisMultiplier:Float = 1
-                    
-                    
+                    let deltaSum = normalize(delta).sum()
+
                     if(abs(difference.x) == abs(difference).max()) {
                         if(delta.x * difference.x < 0) {
                             axisMultiplier = -1
@@ -49,27 +63,30 @@ public struct DragParentSystem: System {
                         
                         print("y", delta.y, difference.y)
                     }
-                    else if(abs(difference.z) == abs(difference).max()) {
+                    else if abs(difference.z) == abs(difference).max() {
                         if(abs(delta.z) == abs(delta).max()) {
                             if(delta.z * difference.z < 0) {
                                 axisMultiplier = -1
                             }
                             print("zz", delta.z,  difference.z)
                         }
-                        else {
-                            let diffY:Float = difference.y == 0 ? -1 : difference.y
+                        else if let deviceAnchor = worldTrackingProvider.queryDeviceAnchor(atTimestamp: CACurrentMediaTime()) {
+                            let cameraTransform = Transform(matrix: deviceAnchor.originFromAnchorTransform)
+                            let diffY = normalize(parent.position(relativeTo: nil) - cameraTransform.translation).y
+
                             if(delta.y * diffY < 0 ) {
                                 axisMultiplier = -1
                             }
-                            print("zy", delta.y,  delta.z, difference, axisMultiplier)
+                            
+                            
+                            print(diffY)
                         }
                         
                     }
-                                        
+                    
                     parent.position += difference * sensitivity * axisMultiplier
                     entity.components[DragParentComponent.self]?.delta = nil
                 }
-                
             }
             
         }

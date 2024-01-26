@@ -76,7 +76,7 @@ struct ImmersiveView: View {
         .gesture(DragGesture(minimumDistance: 0.0)
             .targetedToAnyEntity()
             .onChanged { value in
-                var delta = simd_float3.zero
+                var delta = value.convert(value.startLocation3D, from: .local, to: .scene)
                 let location3D = value.convert(value.location3D, from: .local, to: .scene)
                 if let previousDragLocation = previousDragLocation {
                     delta = location3D - previousDragLocation
