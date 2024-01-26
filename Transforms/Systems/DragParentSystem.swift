@@ -33,10 +33,39 @@ public struct DragParentSystem: System {
                 }
                 
                 if let difference = difference {
-                    let deltaSum = Float(normalize(delta).sum())
-                    let diffrenceSum = difference.sum()
-                    let deltaDifferenceProduct = diffrenceSum * deltaSum
-                    let axisMultiplier:Float = (deltaDifferenceProduct > 0) ? 1 : -1
+                    var axisMultiplier:Float = 1
+                    
+                    
+                    if(abs(difference.x) == abs(difference).max()) {
+                        if(delta.x * difference.x < 0) {
+                            axisMultiplier = -1
+                        }
+                        print("x", delta.x, difference.x)
+                    }
+                    else if(abs(difference.y) == abs(difference).max()) {
+                        if(delta.y * difference.y < 0) {
+                            axisMultiplier = -1
+                        }
+                        
+                        print("y", delta.y, difference.y)
+                    }
+                    else if(abs(difference.z) == abs(difference).max()) {
+                        if(abs(delta.z) == abs(delta).max()) {
+                            if(delta.z * difference.z < 0) {
+                                axisMultiplier = -1
+                            }
+                            print("zy", delta.y,  difference.z)
+                        }
+                        else {
+                            if(delta.y * difference.y < 0) {
+                                axisMultiplier = -1
+                            }
+                            print("zz", delta.y,  difference.z)
+
+                        }
+                        
+                    }
+                                        
                     parent.position += difference * sensitivity * axisMultiplier
                     entity.components[DragParentComponent.self]?.delta = nil
                 }
