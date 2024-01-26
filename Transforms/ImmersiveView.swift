@@ -22,13 +22,19 @@ struct ImmersiveView: View {
     
     var body: some View {
         RealityView { content in
-            let gizmo = buildSphere(0.1, .gray)
-            gizmo.position = [0, 1.8, -2]
-            content.add(gizmo)
+            let max:Float = 2.0 * .pi
+            let steps = 10
             
-            let gizmo2 = buildSphere(0.1, .orange)
-            gizmo2.position = [1, 1.8, -2]
-            content.add(gizmo2)            
+            for step in 1...steps {
+                let radius:Float = 1
+                let radians = Float(step) * max/Float(steps)
+                let x = radius * cos(radians)
+                let y = radius * sin(radians)
+                let gizmo = buildSphere(0.1, .gray)
+                gizmo.position = [x, y, 0] + [0, 1.8, -2]
+                content.add(gizmo)
+                print(step)
+            }
         }
         .dragRotation()
         .dragParent()
