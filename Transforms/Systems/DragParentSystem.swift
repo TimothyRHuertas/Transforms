@@ -17,7 +17,7 @@ public struct DragParentSystem: System {
     
     public func update(context: SceneUpdateContext) {
         let scene = context.scene
-        let entities = scene.performQuery(Self.query).filter({$0.components[DragParentComponent.self]?.delta != nil && $0.parent != nil})
+        let entities = scene.performQuery(Self.query).filter({$0.components[DragParentComponent.self]?.delta != nil && $0.parent != nil && $0.components[DragParentComponent.self]!.delta! != .zero})
 
         for entity in entities {
             if let component = entity.components[DragParentComponent.self], let delta = component.delta, let parent = entity.parent {
@@ -35,7 +35,6 @@ public struct DragParentSystem: System {
                 if let difference = difference {
                     var axisMultiplier:Float = 1
                     
-                    
                     if(abs(difference.x) == abs(difference).max()) {
                         if(delta.x * difference.x < 0) {
                             axisMultiplier = -1
@@ -50,20 +49,10 @@ public struct DragParentSystem: System {
                         print("y", delta.y, difference.y)
                     }
                     else if(abs(difference.z) == abs(difference).max()) {
-                        if(abs(delta.z) == abs(delta).max()) {
-                            if(delta.z * difference.z < 0) {
-                                axisMultiplier = -1
-                            }
-                            print("zz", delta.z,  difference.z)
+                        if(delta.z * difference.z < 0) {
+                            axisMultiplier = -1
                         }
-                        else {
-                            let diffY:Float = difference.y == 0 ? -1 : difference.y
-                            if(delta.y * diffY < 0 ) {
-                                axisMultiplier = -1
-                            }
-                            print("zy", delta.y,  delta.z, difference, axisMultiplier)
-                        }
-                        
+                        print("zz", delta.z,  difference.z)
                     }
                                         
                     parent.position += difference * sensitivity * axisMultiplier
