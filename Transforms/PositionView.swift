@@ -9,7 +9,7 @@ import SwiftUI
 import RealityKit
 import RealityKitContent
 
-struct ImmersiveView: View {
+struct PositionView: View {
     private func buildSphere(_ radius:Float, _ color:UIColor) -> Entity {
         let material = SimpleMaterial.init(color: color, isMetallic: true)
         let mesh = MeshResource.generateSphere(radius: radius)
@@ -42,6 +42,6 @@ struct ImmersiveView: View {
 }
 
 #Preview {
-    ImmersiveView()
+    PositionView()
         .previewLayout(.sizeThatFits)
 }

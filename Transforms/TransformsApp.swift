@@ -26,7 +26,7 @@ struct TransformsApp: App {
         }
 
         ImmersiveSpace(id: "ImmersiveSpace") {
-            ImmersiveView()
+            PositionView()
         }
     }
 }

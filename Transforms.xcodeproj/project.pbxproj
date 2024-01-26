@@ -10,7 +10,7 @@
 		598D45C92B61A7AB00B17C95 /* RealityKitContent in Frameworks */ = {isa = PBXBuildFile; productRef = 598D45C82B61A7AB00B17C95 /* RealityKitContent */; };
 		598D45CB2B61A7AB00B17C95 /* TransformsApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 598D45CA2B61A7AB00B17C95 /* TransformsApp.swift */; };
 		598D45CD2B61A7AB00B17C95 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 598D45CC2B61A7AB00B17C95 /* ContentView.swift */; };
-		598D45CF2B61A7AB00B17C95 /* ImmersiveView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 598D45CE2B61A7AB00B17C95 /* ImmersiveView.swift */; };
+		598D45CF2B61A7AB00B17C95 /* PositionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 598D45CE2B61A7AB00B17C95 /* PositionView.swift */; };
 		598D45D12B61A7AE00B17C95 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 598D45D02B61A7AE00B17C95 /* Assets.xcassets */; };
 		598D45D42B61A7AE00B17C95 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 598D45D32B61A7AE00B17C95 /* Preview Assets.xcassets */; };
 		598D45DF2B61A7AF00B17C95 /* TransformsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 598D45DE2B61A7AF00B17C95 /* TransformsTests.swift */; };
@@ -39,7 +39,7 @@
 		598D45C72B61A7AB00B17C95 /* RealityKitContent */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = RealityKitContent; sourceTree = "<group>"; };
 		598D45CA2B61A7AB00B17C95 /* TransformsApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransformsApp.swift; sourceTree = "<group>"; };
 		598D45CC2B61A7AB00B17C95 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
-		598D45CE2B61A7AB00B17C95 /* ImmersiveView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImmersiveView.swift; sourceTree = "<group>"; };
+		598D45CE2B61A7AB00B17C95 /* PositionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PositionView.swift; sourceTree = "<group>"; };
 		598D45D02B61A7AE00B17C95 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		598D45D32B61A7AE00B17C95 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		598D45D52B61A7AE00B17C95 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -101,7 +101,7 @@
 				59FE158F2B61D16D0083F7EE /* Systems */,
 				598D45CA2B61A7AB00B17C95 /* TransformsApp.swift */,
 				598D45CC2B61A7AB00B17C95 /* ContentView.swift */,
-				598D45CE2B61A7AB00B17C95 /* ImmersiveView.swift */,
+				598D45CE2B61A7AB00B17C95 /* PositionView.swift */,
 				598D45D02B61A7AE00B17C95 /* Assets.xcassets */,
 				598D45D52B61A7AE00B17C95 /* Info.plist */,
 				598D45D22B61A7AE00B17C95 /* Preview Content */,
@@ -275,7 +275,7 @@
 				59FE15942B61D1B00083F7EE /* DragRotateComponent.swift in Sources */,
 				59FE15982B61D9AF0083F7EE /* DragParentSystem.swift in Sources */,
 				59FE15A12B6432010083F7EE /* DragParentModifier.swift in Sources */,
-				598D45CF2B61A7AB00B17C95 /* ImmersiveView.swift in Sources */,
+				598D45CF2B61A7AB00B17C95 /* PositionView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
