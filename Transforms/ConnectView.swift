@@ -21,15 +21,14 @@ struct ConnectView: View {
     
     private func buildCylinder(_ height:Float, _ color: UIColor) -> Entity {
         let material = SimpleMaterial.init(color: color, isMetallic: true)
+        let parent = ModelEntity()
         let mesh = MeshResource.generateCylinder(height: height, radius: 0.02)
         let entity = ModelEntity(mesh: mesh, materials: [material])
-        let parent = ModelEntity()
-        
-        entity.transform.rotation = simd_quatf(.init(angle: .degrees(90.0), axis: .z))
-        entity.position += [height/2, 0, 0]
-        
-        parent.addChild(entity)
 
+        entity.transform.rotation = simd_quatf(.init(angle: .degrees(90.0), axis: .z)) * simd_quatf(.init(angle: .degrees(90.0), axis: .x))
+        entity.position = [0, 0, -height/2]
+        parent.addChild(entity)
+  
         return parent
     }
     
@@ -40,17 +39,16 @@ struct ConnectView: View {
             content.add(gizmo)
             
             let gizmo2 = buildSphere(0.1, .gray)
-            gizmo2.position = [2, 1, -2]
+            gizmo2.position = [-1, 1, -3]
             content.add(gizmo2)
             
             //https://swiftui-lab.com/trigonometric-recipes-for-swiftui/
             let differnce = gizmo2.position - gizmo.position
-            var alpha = atan2(differnce.y, differnce.x) // calculate angle
-            alpha = alpha < 0 ? alpha + (.pi * 2) : alpha
             let distance = length(differnce)
             let lineEnity = buildCylinder(distance, .cyan)
             lineEnity.position = gizmo.position
-            lineEnity.transform.rotation = simd_quatf(.init(angle: .radians(Double(alpha)), axis: .z))
+            lineEnity.look(at: gizmo2.position, from: lineEnity.position, relativeTo: lineEnity.parent)
+
             content.add(lineEnity)
         }
         .dragRotation()
