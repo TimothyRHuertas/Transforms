@@ -12,7 +12,8 @@ public struct HunterHuntedSystem: System {
     static let query = EntityQuery(where: .has(HunterHuntedComponent.self))
     
     // 0 is 180 degree field of view and 1 means you'd have to have a direct line of site
-    let preciseness:Float = 0.7
+    let preciseness:Float = 0.5
+    let movement:Float = 0.001
     public static var dependencies: [SystemDependency] {
         [.after(DragRotateSystem.self), .after(DragParentSystem.self )]
     }
@@ -36,6 +37,10 @@ public struct HunterHuntedSystem: System {
                 let hunterToPreyDirection = normalize(preyPosition - hunterPosition)
                 let lookness = dot(hunterToPreyDirection, hunterLookDirection)
                 let canSee = lookness >= preciseness
+                
+                if(canSee) {
+                    hunter.position += hunterToPreyDirection * movement
+                }
                 print(lookness, canSee)
                 
             }
