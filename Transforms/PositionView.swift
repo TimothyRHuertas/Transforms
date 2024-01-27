@@ -14,8 +14,8 @@ struct PositionView: View {
         let material = SimpleMaterial.init(color: color, isMetallic: true)
         let mesh = MeshResource.generateSphere(radius: radius)
         let entity = ModelEntity(mesh: mesh, materials: [material])
-        entity.components.set(DragRotateComponent())
-        entity.components.set(DragTransformComponent())
+//        entity.components.set(DragRotateComponent())
+//        entity.components.set(DragTransformComponent())
 
         return entity
     }
