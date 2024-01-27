@@ -49,8 +49,16 @@ public struct DragParentSystem: System {
                         }
                                             }
                     else if(abs(difference.z) == abs(difference).max()) {
-                        if(delta.z * difference.z < 0) {
-                            axisMultiplier = -1
+                        if(abs(delta.z) == abs(delta).max()) {
+                            if(delta.z * difference.z < 0) {
+                                axisMultiplier = -1
+                            }
+                        }
+                        else {
+                            let diffY:Float = difference.y == 0 ? -1 : difference.y
+                            if(delta.y * diffY < 0 ) {
+                                axisMultiplier = -1
+                            }
                         }
                     }
                                         
