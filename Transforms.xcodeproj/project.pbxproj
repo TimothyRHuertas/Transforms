@@ -17,6 +17,8 @@
 		599C13422B64355C0069C04B /* DragTransformComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 599C13412B64355C0069C04B /* DragTransformComponent.swift */; };
 		599C13442B64359E0069C04B /* DragTransformSystem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 599C13432B64359E0069C04B /* DragTransformSystem.swift */; };
 		599C13462B646B0F0069C04B /* ConnectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 599C13452B646B0F0069C04B /* ConnectView.swift */; };
+		599C13482B649CEC0069C04B /* ConnectToComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 599C13472B649CEC0069C04B /* ConnectToComponent.swift */; };
+		599C134A2B649D200069C04B /* ConnectToSystem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 599C13492B649D200069C04B /* ConnectToSystem.swift */; };
 		59FE15922B61D1910083F7EE /* DragRotateSystem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59FE15912B61D1910083F7EE /* DragRotateSystem.swift */; };
 		59FE15942B61D1B00083F7EE /* DragRotateComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59FE15932B61D1B00083F7EE /* DragRotateComponent.swift */; };
 		59FE15962B61D97C0083F7EE /* DragParentComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59FE15952B61D97C0083F7EE /* DragParentComponent.swift */; };
@@ -49,6 +51,8 @@
 		599C13412B64355C0069C04B /* DragTransformComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DragTransformComponent.swift; sourceTree = "<group>"; };
 		599C13432B64359E0069C04B /* DragTransformSystem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DragTransformSystem.swift; sourceTree = "<group>"; };
 		599C13452B646B0F0069C04B /* ConnectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectView.swift; sourceTree = "<group>"; };
+		599C13472B649CEC0069C04B /* ConnectToComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectToComponent.swift; sourceTree = "<group>"; };
+		599C13492B649D200069C04B /* ConnectToSystem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectToSystem.swift; sourceTree = "<group>"; };
 		59FE15912B61D1910083F7EE /* DragRotateSystem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DragRotateSystem.swift; sourceTree = "<group>"; };
 		59FE15932B61D1B00083F7EE /* DragRotateComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DragRotateComponent.swift; sourceTree = "<group>"; };
 		59FE15952B61D97C0083F7EE /* DragParentComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DragParentComponent.swift; sourceTree = "<group>"; };
@@ -140,6 +144,7 @@
 			isa = PBXGroup;
 			children = (
 				59FE15912B61D1910083F7EE /* DragRotateSystem.swift */,
+				599C13492B649D200069C04B /* ConnectToSystem.swift */,
 				59FE15972B61D9AF0083F7EE /* DragParentSystem.swift */,
 				599C13432B64359E0069C04B /* DragTransformSystem.swift */,
 			);
@@ -152,6 +157,7 @@
 				59FE15932B61D1B00083F7EE /* DragRotateComponent.swift */,
 				59FE15952B61D97C0083F7EE /* DragParentComponent.swift */,
 				599C13412B64355C0069C04B /* DragTransformComponent.swift */,
+				599C13472B649CEC0069C04B /* ConnectToComponent.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -270,8 +276,10 @@
 			files = (
 				599C13422B64355C0069C04B /* DragTransformComponent.swift in Sources */,
 				599C13442B64359E0069C04B /* DragTransformSystem.swift in Sources */,
+				599C134A2B649D200069C04B /* ConnectToSystem.swift in Sources */,
 				598D45CD2B61A7AB00B17C95 /* ContentView.swift in Sources */,
 				59FE15922B61D1910083F7EE /* DragRotateSystem.swift in Sources */,
+				599C13482B649CEC0069C04B /* ConnectToComponent.swift in Sources */,
 				59FE159F2B642F820083F7EE /* DragRotationModifier.swift in Sources */,
 				598D45CB2B61A7AB00B17C95 /* TransformsApp.swift in Sources */,
 				59FE15962B61D97C0083F7EE /* DragParentComponent.swift in Sources */,

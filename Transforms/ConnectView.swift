@@ -9,7 +9,7 @@ import SwiftUI
 import RealityKit
 
 struct ConnectView: View {
-    private func buildSphere(_ radius:Float, _ color:UIColor) -> Entity {
+    private func buildSphere(_ radius:Float, _ color:UIColor) -> ModelEntity {
         let material = SimpleMaterial.init(color: color, isMetallic: true)
         let mesh = MeshResource.generateSphere(radius: radius)
         let entity = ModelEntity(mesh: mesh, materials: [material])
@@ -17,19 +17,6 @@ struct ConnectView: View {
         entity.components.set(DragTransformComponent())
 
         return entity
-    }
-    
-    private func buildCylinder(_ height:Float, _ color: UIColor) -> Entity {
-        let material = SimpleMaterial.init(color: color, isMetallic: true)
-        let parent = ModelEntity()
-        let mesh = MeshResource.generateCylinder(height: height, radius: 0.02)
-        let entity = ModelEntity(mesh: mesh, materials: [material])
-
-        entity.transform.rotation = simd_quatf(.init(angle: .degrees(90.0), axis: .z)) * simd_quatf(.init(angle: .degrees(90.0), axis: .x))
-        entity.position = [0, 0, -height/2]
-        parent.addChild(entity)
-  
-        return parent
     }
     
     var body: some View {
@@ -42,14 +29,7 @@ struct ConnectView: View {
             gizmo2.position = [-1, 1, -3]
             content.add(gizmo2)
             
-            //https://swiftui-lab.com/trigonometric-recipes-for-swiftui/
-            let differnce = gizmo2.position - gizmo.position
-            let distance = length(differnce)
-            let lineEnity = buildCylinder(distance, .cyan)
-            lineEnity.position = gizmo.position
-            lineEnity.look(at: gizmo2.position, from: lineEnity.position, relativeTo: lineEnity.parent)
-
-            content.add(lineEnity)
+            gizmo.components.set(ConnectToComponent(entity: gizmo2))            
         }
         .dragRotation()
         .dragParent()
