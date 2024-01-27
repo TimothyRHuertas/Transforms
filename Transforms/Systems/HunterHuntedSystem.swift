@@ -13,7 +13,7 @@ public struct HunterHuntedSystem: System {
     
     // 0 is 180 degree field of view and 1 means you'd have to have a direct line of site
     let preciseness:Float = 0.5
-    let movementSpeed:Float = 0.001
+    let movementSpeed:Float = 0.005
     let roationSpeed:Float = 0.01
     public static var dependencies: [SystemDependency] {
         [.after(DragRotateSystem.self), .after(DragParentSystem.self )]
@@ -47,9 +47,9 @@ public struct HunterHuntedSystem: System {
                     
                     if(desiredRotation == hunterRotation) {
                         let targetPosition = hunter.position + hunterToPreyDirection * movementSpeed
-//                        let absDelta = abs((abs(targetPosition) - abs(preyPosition)).sum())
-//                        hunter.position = absDelta > movementSpeed * 0.02 ? targetPosition : preyPosition
-                        hunter.position = targetPosition
+                        let distance = distance(preyPosition, targetPosition)
+
+                        hunter.position = distance > movementSpeed * 2 ? targetPosition : preyPosition
                     }
                     else {
                         let desiredRotationVector = desiredRotation.vector
@@ -59,9 +59,9 @@ public struct HunterHuntedSystem: System {
                         //todo...the same for position
                         let targetRotation = hunterRotation + simd_quatf(vector: rotationDelta * roationSpeed)
                         let targetRotationVector = targetRotation.vector
-                        let absDelta = abs((abs(targetRotationVector) - abs(desiredRotationVector)).sum())
-                        hunter.transform.rotation =  absDelta > roationSpeed * 2 ? targetRotation : desiredRotation
-                                                
+                        let distance = distance(targetRotationVector, desiredRotationVector)
+                        hunter.transform.rotation =  distance > roationSpeed * 2 ? targetRotation : desiredRotation
+                        print(distance)
                     }
                 }
                 
