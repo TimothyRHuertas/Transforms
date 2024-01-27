@@ -47,8 +47,7 @@ public struct HunterHuntedSystem: System {
                     
                     if(desiredRotation == hunterRotation) {
                         let targetPosition = hunter.position + hunterToPreyDirection * movementSpeed
-                        let absDelta = abs((abs(targetPosition) - abs(preyPosition)).sum())
-
+//                        let absDelta = abs((abs(targetPosition) - abs(preyPosition)).sum())
 //                        hunter.position = absDelta > movementSpeed * 0.02 ? targetPosition : preyPosition
                         hunter.position = targetPosition
                     }
