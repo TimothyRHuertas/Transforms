@@ -41,7 +41,7 @@ public struct DragTransformSystem: System {
             entity.generateCollisionShapes(recursive: true)
             entity.components.set(CollisionComponent(shapes: entity.collision!.shapes))
         }
-}
+    }
     
     public func update(context: SceneUpdateContext) {
         let scene = context.scene
