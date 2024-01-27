@@ -40,14 +40,17 @@ public struct HunterHuntedSystem: System {
                 let canSee = lookness >= preciseness
                 
                 if(canSee) {
-                    
                     let hackHunter = hunter.clone(recursive: false)
                     hackHunter.look(at: preyPosition, from: hunterPosition, relativeTo: nil, forward: .positiveZ)
                     let desiredRotation = hackHunter.transform.rotation
                     let hunterRotation = hunter.transform.rotation
                     
                     if(desiredRotation == hunterRotation) {
-                        hunter.position += hunterToPreyDirection * movementSpeed
+                        let targetPosition = hunter.position + hunterToPreyDirection * movementSpeed
+                        let absDelta = abs((abs(targetPosition) - abs(preyPosition)).sum())
+
+//                        hunter.position = absDelta > movementSpeed * 0.02 ? targetPosition : preyPosition
+                        hunter.position = targetPosition
                     }
                     else {
                         let desiredRotationVector = desiredRotation.vector
@@ -58,10 +61,8 @@ public struct HunterHuntedSystem: System {
                         let targetRotation = hunterRotation + simd_quatf(vector: rotationDelta * roationSpeed)
                         let targetRotationVector = targetRotation.vector
                         let absDelta = abs((abs(targetRotationVector) - abs(desiredRotationVector)).sum())
-                        hunter.transform.rotation =  absDelta > 0.02 ? targetRotation : desiredRotation
-                        
-                        print(absDelta)
-                        
+                        hunter.transform.rotation =  absDelta > roationSpeed * 2 ? targetRotation : desiredRotation
+                                                
                     }
                 }
                 
