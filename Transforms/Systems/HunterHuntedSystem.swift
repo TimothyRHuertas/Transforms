@@ -57,10 +57,10 @@ public struct HunterHuntedSystem: System {
                         //todo...the same for position
                         let targetRotation = hunterRotation + simd_quatf(vector: rotationDelta * roationSpeed)
                         let targetRotationVector = targetRotation.vector
+                        let absDelta = abs((abs(targetRotationVector) - abs(desiredRotationVector)).sum())
+                        hunter.transform.rotation =  absDelta > 0.02 ? targetRotation : desiredRotation
                         
-                        hunter.transform.rotation = abs(targetRotationVector.sum()) > 1.8 ? targetRotation : desiredRotation
-                        
-                        print(targetRotationVector.sum())
+                        print(absDelta)
                         
                     }
                 }
