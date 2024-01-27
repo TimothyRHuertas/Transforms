@@ -13,7 +13,8 @@ public struct HunterHuntedSystem: System {
     
     // 0 is 180 degree field of view and 1 means you'd have to have a direct line of site
     let preciseness:Float = 0.5
-    let movement:Float = 0.001
+    let movementSpeed:Float = 0.001
+    let roationSpeed:Float = 0.01
     public static var dependencies: [SystemDependency] {
         [.after(DragRotateSystem.self), .after(DragParentSystem.self )]
     }
@@ -39,9 +40,30 @@ public struct HunterHuntedSystem: System {
                 let canSee = lookness >= preciseness
                 
                 if(canSee) {
-                    hunter.position += hunterToPreyDirection * movement
+                    
+                    let hackHunter = hunter.clone(recursive: false)
+                    hackHunter.look(at: preyPosition, from: hunterPosition, relativeTo: nil, forward: .positiveZ)
+                    let desiredRotation = hackHunter.transform.rotation
+                    let hunterRotation = hunter.transform.rotation
+                    
+                    if(desiredRotation == hunterRotation) {
+                        hunter.position += hunterToPreyDirection * movementSpeed
+                    }
+                    else {
+                        let desiredRotationVector = desiredRotation.vector
+                        let hunterRotationVector = hunterRotation.vector
+                        let rotationDelta = normalize(desiredRotationVector - hunterRotationVector)
+                        
+                        //todo...the same for position
+                        let targetRotation = hunterRotation + simd_quatf(vector: rotationDelta * roationSpeed)
+                        let targetRotationVector = targetRotation.vector
+                        
+                        hunter.transform.rotation = abs(targetRotationVector.sum()) > 1.8 ? targetRotation : desiredRotation
+                        
+                        print(targetRotationVector.sum())
+                        
+                    }
                 }
-                print(lookness, canSee)
                 
             }
             

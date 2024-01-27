@@ -32,7 +32,7 @@ public struct ConnectToSystem: System {
 
         if let entity = entity {
             entity.transform.rotation = simd_quatf(.init(angle: .degrees(90.0), axis: .z)) * simd_quatf(.init(angle: .degrees(90.0), axis: .x))
-            entity.position = [0, 0, -height/2]
+            entity.position = [0, 0, height/2]
         }
 
   
@@ -54,7 +54,7 @@ public struct ConnectToSystem: System {
                 
                 //https://swiftui-lab.com/trigonometric-recipes-for-swiftui/
                 lineEntity.position = entity.position
-                lineEntity.look(at: connectedToEntity.position, from: lineEntity.position, relativeTo: lineEntity.parent)
+                lineEntity.look(at: connectedToEntity.position, from: lineEntity.position, relativeTo: lineEntity.parent, forward: .positiveZ)
                 entity.parent?.addChild(lineEntity)
                 entity.components[ConnectToComponent.self]?.lineEntity = lineEntity
             }
