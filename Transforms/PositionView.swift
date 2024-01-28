@@ -22,7 +22,7 @@ class ViewModel {
     var gizmos:[Entity] = .init()
     let steps = 10
     let gizmoRadius:Float = 0.1
-    let layoutWidth:Float = 2.0
+    let layoutWidth:Float = 2.4
     
     func updateGizmoPositions(arrangement:Arrangements) {
         gizmoPositions = gizmos.enumerated().map {
