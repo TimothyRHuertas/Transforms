@@ -32,7 +32,9 @@ public struct DragRotateSystem: System {
     public func update(context: SceneUpdateContext) {
         let scene = context.scene
         let entities = scene.performQuery(Self.query).filter({$0.components[DragRotateComponent.self]?.delta != nil})
-        let deviceAnchor = worldTrackingProvider.queryDeviceAnchor(atTimestamp: CACurrentMediaTime())!
+        if entities.isEmpty {return}
+            
+        guard let deviceAnchor = worldTrackingProvider.queryDeviceAnchor(atTimestamp: CACurrentMediaTime()) else { return }
         let cameraTransform = Transform(matrix: deviceAnchor.originFromAnchorTransform)
         let cameraPosition = simd_make_float3(cameraTransform.matrix.columns.3)
 

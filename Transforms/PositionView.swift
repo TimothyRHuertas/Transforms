@@ -98,16 +98,14 @@ struct PositionView: View {
         let valueF = Float(value)
         let maxValueF = Float(maxValue)
         let x = valueF / maxValueF
-        let it = cos(x * Float.pi)
-        let sinPos:Float = 1 / 2 * (1 - it)
-        print(sinPos, x, value, maxValue)
+        let y:Float = Curve.circular.easeInOut(x)
         
         let gizmoWidth = gizmoRadius * 2
         let spaceBetween = gizmoRadius * 2
         let gizmoWidthAndPadding = (gizmoWidth + spaceBetween)
         let totalWidth = maxValueF * gizmoWidthAndPadding
         let offset:Float = valueF * gizmoWidthAndPadding - totalWidth/2
-        return [offset, sinPos, 0]
+        return [offset, y, 0]
     }
     
     private func layoutGizmos(_ animate:Bool = false) {
