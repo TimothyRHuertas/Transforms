@@ -42,15 +42,14 @@ public struct DragRotateSystem: System {
             if let component = entity.components[DragRotateComponent.self], let delta = component.delta {
                 let rotX = delta.x * sensitivity
                 let rotY = delta.y * sensitivity
-                
                 let cols = cameraTransform.matrix.columns
-                let cameraUp = simd_make_float3(cols.1) + cameraPosition
-
-                let right = cross(cameraUp, entityPosition - cameraPosition)
-                let up = cross(entityPosition - cameraPosition, right)
+                let cameraUp = simd_make_float3(cols.1)
+                let right = simd_normalize(cross(cameraUp, entityPosition - cameraPosition))
+                let yAxis = right.x > 0 ? -1 : 1
                 
-                entity.transform.rotation = simd_quatf(angle: rotX, axis: simd_normalize(up)) * entity.transform.rotation;
-                entity.transform.rotation = simd_quatf(angle: rotY, axis: simd_normalize(right)) * entity.transform.rotation;
+                print(right, yAxis)
+                entity.transform.rotation = simd_quatf(angle: rotX, axis: simd_float3([0, yAxis, 0])) * entity.transform.rotation
+                entity.transform.rotation = simd_quatf(angle: rotY, axis: right) * entity.transform.rotation
                 
                 entity.components[DragRotateComponent.self]?.delta = nil
             }
