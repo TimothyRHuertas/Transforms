@@ -11,7 +11,7 @@ import UIKit
 
 public struct DragRotateSystem: System {
     static let query = EntityQuery(where: .has(DragRotateComponent.self))
-    let sensitivity:Float = 0.4
+    let sensitivity:Float = 30
 
     private let arkitSession = ARKitSession()
     private let worldTrackingProvider = WorldTrackingProvider()
@@ -31,32 +31,28 @@ public struct DragRotateSystem: System {
     }
     public func update(context: SceneUpdateContext) {
         let scene = context.scene
-        let entities = scene.performQuery(Self.query)//.filter({$0.components[DragRotateComponent.self]?.dragGesture != nil})
+        let entities = scene.performQuery(Self.query).filter({$0.components[DragRotateComponent.self]?.delta != nil})
         let deviceAnchor = worldTrackingProvider.queryDeviceAnchor(atTimestamp: CACurrentMediaTime())!
         let cameraTransform = Transform(matrix: deviceAnchor.originFromAnchorTransform)
+        let cameraPosition = simd_make_float3(cameraTransform.matrix.columns.3)
 
         for entity in entities {
             let entityPosition = entity.position(relativeTo: nil)
-            let cameraPosition = cameraTransform.translation
-            let cameraToEntity = normalize(cameraPosition - entityPosition)
             
-
-            print(cameraToEntity)
-
-            if let component = entity.components[DragRotateComponent.self], let dragGesture = component.dragGesture {
-                let location3D = dragGesture.convert(dragGesture.location3D, from: .local, to: .scene)
-                let startLocation3D = dragGesture.convert(dragGesture.startLocation3D, from: .local, to: .scene)
+            if let component = entity.components[DragRotateComponent.self], let delta = component.delta {
+                let rotX = delta.x * sensitivity
+                let rotY = delta.y * sensitivity
                 
-                
-                let delta = (location3D - startLocation3D) * (cameraToEntity.z >= 0 ? 1 : -1)
-                let yaw:Float = component.baseYaw + delta.x * sensitivity
-                let pitch = component.basePitch + delta.y * sensitivity
+                let cols = cameraTransform.matrix.columns
+                let cameraUp = simd_make_float3(cols.1) + cameraPosition
 
-                entity.transform.rotation = simd_quatf(.init(angle: .radians(Double(-pitch)), axis: .x)) * simd_quatf(.init(angle: .radians(Double(yaw)), axis: .y))
+                let right = cross(cameraUp, entityPosition - cameraPosition)
+                let up = cross(entityPosition - cameraPosition, right)
                 
-                entity.components[DragRotateComponent.self]?.dragGesture = nil
-                entity.components[DragRotateComponent.self]?.baseYaw = yaw
-                entity.components[DragRotateComponent.self]?.basePitch = pitch
+                entity.transform.rotation = simd_quatf(angle: rotX, axis: simd_normalize(up)) * entity.transform.rotation;
+                entity.transform.rotation = simd_quatf(angle: rotY, axis: simd_normalize(right)) * entity.transform.rotation;
+                
+                entity.components[DragRotateComponent.self]?.delta = nil
             }
             
         }
