@@ -59,19 +59,16 @@ class ViewModel {
     
     // https://github.com/manuelCarlos/Easing/blob/main/Sources/Easing/Easing.swift#L170C24-L170C38
     func computeCurveLayout(value: Int, maxValue: Int, curveFunction:(_:Float) -> Float) -> simd_float3 {
-        // Ensure the value is within the valid range
-
-        // Map the clamped value to the range [0, pi]
         let valueF = Float(value)
         let maxValueF = Float(maxValue)
-        let x = valueF / maxValueF
-        let y:Float = curveFunction(x)
-        
         let gizmoWidth = gizmoRadius * 2
-        let spaceBetween = gizmoRadius * 2
-        let gizmoWidthAndPadding = (gizmoWidth + spaceBetween)
-        let totalWidth = maxValueF * gizmoWidthAndPadding
-        let offset:Float = valueF * gizmoWidthAndPadding - totalWidth/2
+        let gizmoPadding = gizmoRadius * 2
+        let totalWidth = (maxValueF - 1) * (gizmoWidth + gizmoPadding)
+        let gizmoPos = (gizmoPadding * valueF) + (gizmoWidth * valueF)
+        let x = gizmoPos
+        let y:Float = curveFunction(gizmoPos / totalWidth)
+        let offset:Float = x - totalWidth/2
+        
         return [offset, y, 0]
     }
 }
