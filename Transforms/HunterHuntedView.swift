@@ -28,14 +28,14 @@ struct HunterHuntedView: View {
     var body: some View {
         RealityView { content in
             let gizmo = buildSphere(0.1, .red)
-            gizmo.position = [-1, 1, -2]
+            gizmo.position = [0, 1.3, -2]
             gizmo.components.set(HunterHuntedComponent(isHunter: true))
             content.add(gizmo)
             
-            let gizmo2 = buildSphere(0.1, .green)
-            gizmo2.position = [1, 1, -2]
-            gizmo2.components.set(HunterHuntedComponent(isHunter: false))
-            content.add(gizmo2)
+//            let gizmo2 = buildSphere(0.1, .green)
+//            gizmo2.position = [1, 1, -2]
+//            gizmo2.components.set(HunterHuntedComponent(isHunter: false))
+//            content.add(gizmo2)
             
             
         }
