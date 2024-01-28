@@ -47,7 +47,6 @@ public struct DragRotateSystem: System {
                 let right = simd_normalize(cross(cameraUp, entityPosition - cameraPosition))
                 let yAxis = right.x > 0 ? -1 : 1
                 
-                print(right, yAxis)
                 entity.transform.rotation = simd_quatf(angle: rotX, axis: simd_float3([0, yAxis, 0])) * entity.transform.rotation
                 entity.transform.rotation = simd_quatf(angle: rotY, axis: right) * entity.transform.rotation
                 

@@ -60,7 +60,7 @@ public struct HunterHuntedSystem: System {
                         let targetRotation = hunterRotation + simd_quatf(vector: rotationDelta * roationSpeed)
                         let targetRotationVector = targetRotation.vector
                         let distance = distance(targetRotationVector, desiredRotationVector)
-                        hunter.transform.rotation =  distance > roationSpeed * 2 ? targetRotation : desiredRotation
+                        hunter.transform.rotation =  distance > roationSpeed * 5 ? targetRotation : desiredRotation
                         print(distance)
                     }
                 }

@@ -33,7 +33,6 @@ struct PositionView: View {
                 let gizmo = buildSphere(0.1, .gray)
                 gizmo.position = [x, y, 0] + [0, 1.8, -2]
                 content.add(gizmo)
-                print(step)
             }
         }
         .dragRotation()
