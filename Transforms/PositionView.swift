@@ -13,6 +13,16 @@ enum Arrangements: String, CaseIterable {
     case xyCircle = "Circle XY"
     case yzCircle = "Circle YZ"
     case xzCircle = "Circle XZ"
+    
+    var isCircle : Bool {
+        get {
+            return switch self {
+            case .xyCircle, .yzCircle, .xzCircle:
+                true
+            }
+        }
+        
+    }
 }
 
 @Observable
@@ -57,23 +67,33 @@ struct PositionView: View {
         return entity
     }
     
+    private func computeCircleLayout(index:Int) -> simd_float3 {
+        let radius:Float = 1
+        let radians = Float(index) * max / Float(gizmos.count)
+        let x = radius * cos(radians)
+        let y = radius * sin(radians)
+                    
+        return switch viewModel.arrangement {
+            case .xyCircle:
+                [x, y, 0]
+            case .yzCircle:
+                [x, 0, y]
+            case .xzCircle:
+                [0, x, y]
+        }
+            }
+    
     private func layoutGizmos(_ animate:Bool = false) {
         gizmos.enumerated().forEach {
             index, gizmo in
-            
-            let radius:Float = 1
-            let radians = Float(index) * max / Float(gizmos.count)
-            let x = radius * cos(radians)
-            let y = radius * sin(radians)
-                        
-            let position:simd_float3 = switch viewModel.arrangement {
-                case .xyCircle:
-                    [x, y, 0] + [0, 1.8, -2]
-                case .yzCircle:
-                    [x, 0, y] + [0, 1.8, -2]
-                case .xzCircle:
-                    [0, x, y] + [0, 1.8, -2]
+            var position:simd_float3 = if viewModel.arrangement.isCircle {
+                computeCircleLayout(index: index)
             }
+            else {
+                [0, 0, 0]
+            }
+            
+            position += [0, 1.8, -2]
             
             if animate {
                 var destination = gizmo.transform
