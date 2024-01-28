@@ -13,12 +13,16 @@ enum Arrangements: String, CaseIterable {
     case xyCircle = "Circle XY"
     case yzCircle = "Circle YZ"
     case xzCircle = "Circle XZ"
+    case sinY = "Sin Y"
     
     var isCircle : Bool {
         get {
             return switch self {
             case .xyCircle, .yzCircle, .xzCircle:
                 true
+                
+            default:
+                false
             }
         }
         
@@ -27,7 +31,7 @@ enum Arrangements: String, CaseIterable {
 
 @Observable
 class ViewModel {
-    var arrangement:Arrangements = .xyCircle
+    var arrangement:Arrangements = .sinY
 }
 
 let viewModel = ViewModel()
@@ -56,6 +60,7 @@ struct PositionView: View {
     @State private var gizmos:[Entity] = .init()
     let max:Float = 2.0 * .pi
     let steps = 10
+    let gizmoRadius:Float = 0.1
     
     private func buildSphere(_ radius:Float, _ color:UIColor) -> Entity {
         let material = SimpleMaterial.init(color: color, isMetallic: true)
@@ -67,9 +72,9 @@ struct PositionView: View {
         return entity
     }
     
-    private func computeCircleLayout(index:Int) -> simd_float3 {
+    private func computeCircleLayout(value:Int, maxValue:Int) -> simd_float3 {
         let radius:Float = 1
-        let radians = Float(index) * max / Float(gizmos.count)
+        let radians = Float(value) * max / Float(maxValue)
         let x = radius * cos(radians)
         let y = radius * sin(radians)
                     
@@ -80,17 +85,39 @@ struct PositionView: View {
                 [x, 0, y]
             case .xzCircle:
                 [0, x, y]
+            default:
+                simd_float3.zero
         }
-            }
+    }
+    
+    // https://github.com/manuelCarlos/Easing/blob/main/Sources/Easing/Easing.swift#L170C24-L170C38
+    func computeSinLayout(value: Int, maxValue: Int) -> simd_float3 {
+        // Ensure the value is within the valid range
+
+        // Map the clamped value to the range [0, pi]
+        let valueF = Float(value)
+        let maxValueF = Float(maxValue)
+        let x = valueF / maxValueF
+        let it = cos(x * Float.pi)
+        let sinPos:Float = 1 / 2 * (1 - it)
+        print(sinPos, x, value, maxValue)
+        
+        let gizmoWidth = gizmoRadius * 2
+        let spaceBetween = gizmoRadius * 2
+        let gizmoWidthAndPadding = (gizmoWidth + spaceBetween)
+        let totalWidth = maxValueF * gizmoWidthAndPadding
+        let offset:Float = valueF * gizmoWidthAndPadding - totalWidth/2
+        return [offset, sinPos, 0]
+    }
     
     private func layoutGizmos(_ animate:Bool = false) {
         gizmos.enumerated().forEach {
             index, gizmo in
             var position:simd_float3 = if viewModel.arrangement.isCircle {
-                computeCircleLayout(index: index)
+                computeCircleLayout(value: index, maxValue: gizmos.count)
             }
             else {
-                [0, 0, 0]
+                computeSinLayout(value: index, maxValue: gizmos.count)
             }
             
             position += [0, 1.8, -2]
@@ -117,7 +144,7 @@ struct PositionView: View {
             }
             
             for _ in 1...steps {
-                let gizmo = buildSphere(0.1, .gray)
+                let gizmo = buildSphere(gizmoRadius, .gray)
                 gizmos.append(gizmo)
                 content.add(gizmo)
             }
