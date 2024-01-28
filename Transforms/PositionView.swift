@@ -22,6 +22,7 @@ class ViewModel {
     var gizmos:[Entity] = .init()
     let steps = 10
     let gizmoRadius:Float = 0.1
+    let layoutWidth:Float = 2.0
     
     func updateGizmoPositions(arrangement:Arrangements) {
         gizmoPositions = gizmos.enumerated().map {
@@ -40,7 +41,7 @@ class ViewModel {
     }
     
     private func computeCircleLayout(value:Int, maxValue:Int, arrangement: Arrangements) -> simd_float3 {
-        let radius:Float = 1
+        let radius:Float = layoutWidth / 2
         let valueF = Float(value)
         let maxValueF = Float(maxValue)
         let radians = valueF * 2.0 * .pi / maxValueF
@@ -62,11 +63,12 @@ class ViewModel {
         let valueF = Float(value)
         let maxValueF = Float(maxValue)
         let gizmoWidth = gizmoRadius * 2
-        let gizmoPadding = gizmoRadius * 2
-        let totalWidth = (maxValueF - 1) * (gizmoWidth + gizmoPadding)
-        let gizmoPos = (gizmoPadding * valueF) + (gizmoWidth * valueF)
-        let x = gizmoPos
-        let y:Float = curveFunction(gizmoPos / totalWidth)
+        let totalWidth = layoutWidth
+        let numSpacesNeeded = maxValueF - 1
+        let totalWidthOccupiedByGizmos = numSpacesNeeded * gizmoWidth
+        let gizmoPadding = (totalWidth - totalWidthOccupiedByGizmos) / numSpacesNeeded
+        let x = (gizmoPadding * valueF) + (gizmoWidth * valueF)
+        let y = curveFunction(x / totalWidth)
         let offset:Float = x - totalWidth/2
         
         return [offset, y, 0]
