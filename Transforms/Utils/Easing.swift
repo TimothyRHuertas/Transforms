@@ -42,7 +42,7 @@ import RealModule
 ///
 /// ## See Also:
 /// - [Real](https://github.com/apple/swift-numerics) values.
-public enum Curve <T: Real>: Sendable {
+public enum Curve <T: Real>: String, Sendable, CaseIterable {
 
     /// Quadratic easing curve.
     ///
