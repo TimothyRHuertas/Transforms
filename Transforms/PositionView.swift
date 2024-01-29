@@ -70,12 +70,12 @@ class ViewModel {
     func computeCurveLayout(value: Int, maxValue: Int, curveFunction:(_:Float) -> Float) -> simd_float3 {
         let valueF = Float(value)
         let maxValueF = Float(maxValue)
-        let gizmoWidth = gizmoRadius * 2
+        let gizmoDiameter = gizmoRadius * 2
         let totalWidth = layoutWidth
         let numSpacesNeeded = maxValueF - 1
-        let totalWidthOccupiedByGizmos = numSpacesNeeded * gizmoWidth
+        let totalWidthOccupiedByGizmos = numSpacesNeeded * gizmoDiameter
         let gizmoPadding = (totalWidth - totalWidthOccupiedByGizmos) / numSpacesNeeded
-        let x = (gizmoPadding * valueF) + (gizmoWidth * valueF)
+        let x = (gizmoPadding * valueF) + (gizmoDiameter * valueF)
         let y = curveFunction(x / totalWidth)
         let offset:Float = x - totalWidth/2
         
@@ -85,13 +85,13 @@ class ViewModel {
     func computeXLayout(value:Int, maxValue:Int) -> simd_float3 {
         let valueF = Float(value % (maxValue/2))
         let maxValueF = Float(maxValue/2)
-        let gizmoWidth = gizmoRadius * 2
+        let gizmoDiameter = gizmoRadius * 2
         let totalWidth = layoutWidth
         let numSpacesNeeded = maxValueF - 1
-        let totalWidthOccupiedByGizmos = numSpacesNeeded * gizmoWidth
+        let totalWidthOccupiedByGizmos = numSpacesNeeded * gizmoDiameter
         let gizmoPadding = (totalWidth - totalWidthOccupiedByGizmos) / numSpacesNeeded
-        let x = (gizmoPadding * valueF) + (gizmoWidth * valueF)
-        let y:Float = (gizmoPadding * valueF) + (gizmoWidth * valueF)
+        let x = (gizmoPadding * valueF) + (gizmoDiameter * valueF)
+        let y:Float = (gizmoPadding * valueF) + (gizmoDiameter * valueF)
         let offsetX:Float = x - totalWidth/2
         let offsetY:Float = value >= maxValue/2 ? y - totalWidth/2 : totalWidth/2 - y
 
@@ -161,7 +161,7 @@ struct PositionView: View {
         viewModel.gizmos.enumerated().forEach {
             index, gizmo in
             var position:simd_float3 = viewModel.gizmoPositions[index]
-            position += [0, 1.8, -2]
+            position += [0, 1.6, -2]
             if animate {
                 var destination = gizmo.transform
                 destination.translation = position
