@@ -9,28 +9,19 @@ import SwiftUI
 import RealityKit
 import RealityKitContent
 
-
-enum Arrangements: String, CaseIterable {
-    case xyCircle = "Circle XY"
-    case yzCircle = "Circle YZ"
-    case xzCircle = "Circle XZ"
+enum LayoutShape: String, CaseIterable {
+    case square = "Square"
+    case circle = "Circle"
+    case x = "X"
 }
 
 @Observable
 class ViewModel {
     var gizmoPositions: [simd_float3] = .init()
     var gizmos:[Entity] = .init()
-    let steps = 10
+    let numGizmos = 12
     let gizmoRadius:Float = 0.1
     let layoutWidth:Float = 2.4
-    
-    func updateGizmoPositions(arrangement:Arrangements) {
-        gizmoPositions = gizmos.enumerated().map {
-            index, gizmo in
-            
-            return computeCircleLayout(value: index, maxValue: gizmos.count, arrangement: arrangement)
-        }
-    }
     
     func updateGizmoPositions(curveFunction:(_:Float) -> Float) {
         gizmoPositions = gizmos.enumerated().map {
@@ -40,15 +31,23 @@ class ViewModel {
         }
     }
     
-    func updateGizmoPositions() {
+    func updateGizmoPositions(shape:LayoutShape) {
         gizmoPositions = gizmos.enumerated().map {
             index, gizmo in
             
-            return computeXLayout(value: index, maxValue: gizmos.count)
+            return switch shape {
+                
+            case .square:
+                computeSquareLayout(value: index, maxValue: gizmos.count)
+            case .circle:
+                computeCircleLayout(value: index, maxValue: gizmos.count)
+            case .x:
+                computeXLayout(value: index, maxValue: gizmos.count)
+            }
         }
     }
     
-    private func computeCircleLayout(value:Int, maxValue:Int, arrangement: Arrangements) -> simd_float3 {
+    private func computeCircleLayout(value:Int, maxValue:Int) -> simd_float3 {
         let radius:Float = layoutWidth / 2
         let valueF = Float(value)
         let maxValueF = Float(maxValue)
@@ -56,14 +55,7 @@ class ViewModel {
         let x = radius * cos(radians)
         let y = radius * sin(radians)
                     
-        return switch arrangement {
-            case .xyCircle:
-                [x, y, 0]
-            case .yzCircle:
-                [x, 0, y]
-            case .xzCircle:
-                [0, x, y]
-        }
+        return [x, y, 0]
     }
     
     // https://github.com/manuelCarlos/Easing/blob/main/Sources/Easing/Easing.swift#L170C24-L170C38
@@ -97,7 +89,41 @@ class ViewModel {
 
         return [offsetX, offsetY, 0]
     }
+    
+    func computeSquareLayout(value:Int, maxValue:Int) -> simd_float3 {
+        let numSides = 4
+        let valueF = Float(value)
+        let maxValueF = Float(maxValue)
+        let gizmoDiameter = gizmoRadius * 2
+        let numSpacesNeeded = maxValueF/Float(numSides) - 1
+        let totalWidthOccupiedByGizmos = numSpacesNeeded * gizmoDiameter
+        let gizmoPadding = (layoutWidth - totalWidthOccupiedByGizmos) / numSpacesNeeded
+        let side:Float = Float(value % numSides)
+     
+        let offset = (gizmoPadding + gizmoDiameter) * floor(valueF/4)
+        let x:Float = switch side {
+            case 0: //left
+                0
+            case 1: //right
+                layoutWidth
+            default: // top / bottom
+                offset
+        }
+        
+        let y:Float = switch side {
+            case 2: //bottom
+               0
+            case 3: //top
+                layoutWidth
+            default: // left / right
+                offset
+        }
+        
+        let offsetX:Float = x  - layoutWidth/2
+        let offsetY:Float = y - layoutWidth/2
 
+        return [offsetX, offsetY, 0]
+    }
 }
 
 let viewModel = ViewModel()
@@ -106,21 +132,14 @@ struct SettingsMenuView: View {
     var body: some View {
         HStack {
             VStack {
-                ForEach(Array(Arrangements.allCases), id: \.self) {
+                ForEach(Array(LayoutShape.allCases), id: \.self) {
                     value in
                     Button(value.rawValue) {
                         Task {
-                            viewModel.updateGizmoPositions(arrangement: value)
+                            viewModel.updateGizmoPositions(shape: value)
                         }
                         
                     }
-                }
-                
-                Button("X") {
-                    Task {
-                        viewModel.updateGizmoPositions()
-                    }
-                    
                 }
             }
             
@@ -183,13 +202,13 @@ struct PositionView: View {
                 content.add(headAnchor)
             }
             
-            for _ in 1...viewModel.steps {
+            for _ in 1...viewModel.numGizmos {
                 let gizmo = buildSphere(viewModel.gizmoRadius, .gray)
                 viewModel.gizmos.append(gizmo)
                 content.add(gizmo)
             }
             
-            viewModel.updateGizmoPositions()
+            viewModel.updateGizmoPositions(shape: .square)
             layoutGizmos()
         }
         attachments: {
