@@ -14,7 +14,7 @@ public struct HunterHuntedSystem: System {
     // 0 is 180 degree field of view and 1 means you'd have to have a direct line of site
     let preciseness:Float = 0.5
     let movementSpeed:Float = 0.005
-    let roationSpeed:Float = 0.01
+    let rotationSpeed:Float = 0.01
     public static var dependencies: [SystemDependency] {
         [.after(DragRotateSystem.self), .after(DragParentSystem.self )]
     }
@@ -44,24 +44,16 @@ public struct HunterHuntedSystem: System {
                     hackHunter.look(at: preyPosition, from: hunterPosition, relativeTo: nil, forward: .positiveZ)
                     let desiredRotation = hackHunter.transform.rotation
                     let hunterRotation = hunter.transform.rotation
-                    
-                    if(desiredRotation == hunterRotation) {
+                    let rotationSimilarity = abs(dot(desiredRotation, hunterRotation))
+
+                    if(rotationSimilarity > 0.999) {
                         let targetPosition = hunter.position + hunterToPreyDirection * movementSpeed
                         let distance = distance(preyPosition, targetPosition)
 
                         hunter.position = distance > movementSpeed * 2 ? targetPosition : preyPosition
                     }
                     else {
-                        let desiredRotationVector = desiredRotation.vector
-                        let hunterRotationVector = hunterRotation.vector
-                        let rotationDelta = normalize(desiredRotationVector - hunterRotationVector)
-                        
-                        //todo...the same for position
-                        let targetRotation = hunterRotation + simd_quatf(vector: rotationDelta * roationSpeed)
-                        let targetRotationVector = targetRotation.vector
-                        let distance = distance(targetRotationVector, desiredRotationVector)
-                        hunter.transform.rotation =  distance > roationSpeed * 5 ? targetRotation : desiredRotation
-                        print(distance)
+                        hunter.transform.rotation =  rotationSimilarity > 0.999 ? desiredRotation : simd_slerp(hunterRotation, desiredRotation, rotationSpeed)
                     }
                 }
                 
