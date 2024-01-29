@@ -40,6 +40,14 @@ class ViewModel {
         }
     }
     
+    func updateGizmoPositions() {
+        gizmoPositions = gizmos.enumerated().map {
+            index, gizmo in
+            
+            return computeXLayout(value: index, maxValue: gizmos.count)
+        }
+    }
+    
     private func computeCircleLayout(value:Int, maxValue:Int, arrangement: Arrangements) -> simd_float3 {
         let radius:Float = layoutWidth / 2
         let valueF = Float(value)
@@ -73,6 +81,23 @@ class ViewModel {
         
         return [offset, y, 0]
     }
+    
+    func computeXLayout(value:Int, maxValue:Int) -> simd_float3 {
+        let valueF = Float(value % (maxValue/2))
+        let maxValueF = Float(maxValue/2)
+        let gizmoWidth = gizmoRadius * 2
+        let totalWidth = layoutWidth
+        let numSpacesNeeded = maxValueF - 1
+        let totalWidthOccupiedByGizmos = numSpacesNeeded * gizmoWidth
+        let gizmoPadding = (totalWidth - totalWidthOccupiedByGizmos) / numSpacesNeeded
+        let x = (gizmoPadding * valueF) + (gizmoWidth * valueF)
+        let y:Float = (gizmoPadding * valueF) + (gizmoWidth * valueF)
+        let offsetX:Float = x - totalWidth/2
+        let offsetY:Float = value >= maxValue/2 ? y - totalWidth/2 : totalWidth/2 - y
+
+        return [offsetX, offsetY, 0]
+    }
+
 }
 
 let viewModel = ViewModel()
@@ -89,6 +114,13 @@ struct SettingsMenuView: View {
                         }
                         
                     }
+                }
+                
+                Button("X") {
+                    Task {
+                        viewModel.updateGizmoPositions()
+                    }
+                    
                 }
             }
             
@@ -118,8 +150,8 @@ struct PositionView: View {
         let material = SimpleMaterial.init(color: color, isMetallic: true)
         let mesh = MeshResource.generateSphere(radius: radius)
         let entity = ModelEntity(mesh: mesh, materials: [material])
-        entity.components.set(DragRotateComponent())
-        entity.components.set(DragTransformComponent())
+//        entity.components.set(DragRotateComponent())
+//        entity.components.set(DragTransformComponent())
 
         return entity
     }
@@ -157,7 +189,7 @@ struct PositionView: View {
                 content.add(gizmo)
             }
             
-            viewModel.updateGizmoPositions(arrangement: .xyCircle)
+            viewModel.updateGizmoPositions()
             layoutGizmos()
         }
         attachments: {
