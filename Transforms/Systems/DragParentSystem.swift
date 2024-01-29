@@ -7,14 +7,13 @@
 
 import RealityKit
 
-
 public struct DragParentSystem: System {
     static let query = EntityQuery(where: .has(DragParentComponent.self))
     let sensitivity:Float =  0.05
-    
+
     public init(scene: RealityKit.Scene) {
     }
-    
+
     public func update(context: SceneUpdateContext) {
         let scene = context.scene
         let entities = scene.performQuery(Self.query).filter({$0.components[DragParentComponent.self]?.delta != nil && $0.parent != nil && $0.components[DragParentComponent.self]!.delta! != .zero})
@@ -32,36 +31,10 @@ public struct DragParentSystem: System {
                     default:nil
                 }
                 
-                let deltaSum = normalize(delta).sum()
-                
                 // Leaving this way so I can debug later
                 if let difference = difference {
-                    var axisMultiplier:Float = 1
-                    
-                    if(abs(difference.x) == abs(difference).max()) {
-                        if(deltaSum * difference.x < 0) {
-                            axisMultiplier = -1
-                        }
-                    }
-                    else if(abs(difference.y) == abs(difference).max()) {
-                        if(deltaSum * difference.y < 0) {
-                            axisMultiplier = -1
-                        }
-                                            }
-                    else if(abs(difference.z) == abs(difference).max()) {
-                        if(abs(delta.z) == abs(delta).max()) {
-                            if(delta.z * difference.z < 0) {
-                                axisMultiplier = -1
-                            }
-                        }
-                        else {
-                            let diffY:Float = difference.y == 0 ? -1 : difference.y
-                            if(delta.y * diffY < 0 ) {
-                                axisMultiplier = -1
-                            }
-                        }
-                    }
-                                        
+                    let deltaDotDifference = dot(normalize(delta), normalize(difference))
+                    let axisMultiplier:Float =  deltaDotDifference  < 0 ? -1 : 1
                     parent.position += difference * sensitivity * axisMultiplier
                     entity.components[DragParentComponent.self]?.delta = nil
                 }

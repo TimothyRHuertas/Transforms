@@ -29,9 +29,9 @@ struct TransformsApp: App {
         }
 
         ImmersiveSpace(id: "ImmersiveSpace") {
-//            PositionView()
+            PositionView()
 //            ConnectView()
-            HunterHuntedView()
+//            HunterHuntedView()
         }
     }
 }
