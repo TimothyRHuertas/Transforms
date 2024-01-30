@@ -91,38 +91,57 @@ class ViewModel {
     }
     
     func computeSquareLayout(value:Int, maxValue:Int) -> simd_float3 {
-        let numSides = 4
         let valueF = Float(value)
         let maxValueF = Float(maxValue)
         let gizmoDiameter = gizmoRadius * 2
-        let numSpacesNeeded = maxValueF/Float(numSides) - 1
-        let totalWidthOccupiedByGizmos = numSpacesNeeded * gizmoDiameter
-        let gizmoPadding = (layoutWidth - totalWidthOccupiedByGizmos) / numSpacesNeeded
-        let side:Float = Float(value % numSides)
-     
-        let offset = (gizmoPadding + gizmoDiameter) * floor(valueF/4)
-        let x:Float = switch side {
-            case 0: //left
-                0
-            case 1: //right
-                layoutWidth
-            default: // top / bottom
-                offset
-        }
         
-        let y:Float = switch side {
-            case 2: //bottom
-               0
-            case 3: //top
-                layoutWidth
-            default: // left / right
-                offset
-        }
         
-        let offsetX:Float = x  - layoutWidth/2
-        let offsetY:Float = y - layoutWidth/2
+        var x:Float = 0
+        var y:Float = 0
+        
+        if value == 1 {
+            y = layoutWidth
+        }
+        else if value == 2 {
+            x = layoutWidth
+            y = layoutWidth
+        }
+        else if value == 3 {
+            x = layoutWidth
+        }
+        else if value != 0 {
+            let lineNum = value % 4
+            //| | _ - = 0, 1, 2, 3
+            let isVerticle = lineNum < 2
+            let numValuesForSides = Float(maxValue - 4)
+            let valuesPerVerticle = ceil(numValuesForSides / 4)
+            let position = value / 4
 
-        return [offsetX, offsetY, 0]
+            print("vpv", valuesPerVerticle)
+            
+            if(isVerticle) {
+                let numSpaces = valuesPerVerticle + 1
+                let gizmoPadding = (layoutWidth - numSpaces * gizmoDiameter) / numSpaces
+                y = Float(position) * (gizmoPadding + gizmoDiameter)
+
+                if (lineNum == 1) {
+                    x = layoutWidth
+                }
+            }
+            else {
+                let valuesPerHorizontal = numValuesForSides / 2 - valuesPerVerticle
+                let numSpaces = valuesPerHorizontal + 1
+                let gizmoPadding = (layoutWidth - numSpaces * gizmoDiameter) / numSpaces
+                x = Float(position) * (gizmoPadding + gizmoDiameter)
+
+                if (lineNum == 3) {
+                    y = layoutWidth
+                }
+            }
+
+        }
+
+        return [x, y, 0] - [layoutWidth, layoutWidth, 0] / 2
     }
 }
 

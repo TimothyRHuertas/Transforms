@@ -20,5 +20,69 @@
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "E60BB4B8-2553-4321-ACAE-077D052A7622"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Transforms/PositionView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "125"
+            endingLineNumber = "125"
+            landmarkName = "computeSquareLayout(value:maxValue:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "E60BB4B8-2553-4321-ACAE-077D052A7622 - e5a8f886a371ffcd"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Transforms.ViewModel.computeSquareLayout(value: Swift.Int, maxValue: Swift.Int) -&gt; Swift.SIMD3&lt;Swift.Float&gt;"
+                  moduleName = "Transforms"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/timothyhuertas/workspace/Transforms/Transforms/PositionView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "123"
+                  endingLineNumber = "123"
+                  offsetFromSymbolStart = "1104">
+               </Location>
+               <Location
+                  uuid = "E60BB4B8-2553-4321-ACAE-077D052A7622 - e5a8f886a371ffcd"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Transforms.ViewModel.computeSquareLayout(value: Swift.Int, maxValue: Swift.Int) -&gt; Swift.SIMD3&lt;Swift.Float&gt;"
+                  moduleName = "Transforms"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/timothyhuertas/workspace/Transforms/Transforms/PositionView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "123"
+                  endingLineNumber = "123"
+                  offsetFromSymbolStart = "1132">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "CD2AEDA2-2845-4021-B0B3-30D0C432206D"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Transforms/PositionView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "127"
+            endingLineNumber = "127"
+            landmarkName = "computeSquareLayout(value:maxValue:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
    </Breakpoints>
 </Bucket>
