@@ -9,6 +9,7 @@ import SwiftUI
 
 @main
 struct TransformsApp: App {
+    @Bindable private var viewModel = ViewModel()
     init() {
         DragRotateComponent.registerComponent()
         DragRotateSystem.registerSystem()
@@ -27,11 +28,19 @@ struct TransformsApp: App {
         WindowGroup(id: "ContentView") {
             ContentView()
         }
-
+        
         ImmersiveSpace(id: "ImmersiveSpace") {
-            PositionView()
-//            ConnectView()
-//            HunterHuntedView()
+            NavigationView().environment(viewModel)
+            
+            switch viewModel.currentView {
+                
+            case .position:
+                PositionView()
+            case .chase:
+                HunterHuntedView()
+            case .connect:
+                ConnectView()
+            }
         }
     }
 }

@@ -28,7 +28,7 @@ enum ShapeSpan: String, CaseIterable, Identifiable {
 }
 
 @Observable
-class ViewModel {
+class PositionViewModel {
     var gizmoPositions: [simd_float3] = .init()
     var layoutShape:LayoutShape = .circle
     var shapeSpan:ShapeSpan = .width
@@ -191,23 +191,23 @@ class ViewModel {
 
 
 struct SettingsMenuView: View {
-    @State private var viewModel:ViewModel
-    @State private var foo = true
-    init(viewModel: ViewModel) {
-        self.viewModel = viewModel
+    @State private var positionViewModel:PositionViewModel
+
+    init(positionViewModel: PositionViewModel) {
+        self.positionViewModel = positionViewModel
     }
     
     var body: some View {
         VStack {
             Text("Settings").font(.largeTitle)
-            Toggle(isOn: $viewModel.animateToFarthest, label: {
+            Toggle(isOn: $positionViewModel.animateToFarthest, label: {
                 Text("Farthest path")
             })
             HStack {
                 Text("Shape")
                 Spacer()
             }
-            Picker("Shape", selection: $viewModel.layoutShape) {
+            Picker("Shape", selection: $positionViewModel.layoutShape) {
                 ForEach(LayoutShape.allCases) { shape in
                     Text(shape.rawValue.capitalized)
                 }
@@ -220,7 +220,7 @@ struct SettingsMenuView: View {
                 Spacer()
             }
             
-            Picker("Span", selection: $viewModel.shapeSpan) {
+            Picker("Span", selection: $positionViewModel.shapeSpan) {
                 ForEach(ShapeSpan.allCases) { span in
                     Text(span.rawValue.capitalized)
                 }
@@ -239,8 +239,8 @@ struct SettingsMenuView: View {
 
 struct PositionView: View {
     let settingsMenuTag = "settingsMenu"
-    @State private var viewModel = ViewModel()
-
+    @State private var positionViewModel = PositionViewModel()
+    
     private func buildSphere(_ radius:Float, _ color:UIColor) -> Entity {
         let material = SimpleMaterial.init(color: color, isMetallic: true)
         let mesh = MeshResource.generateSphere(radius: radius)
@@ -252,10 +252,10 @@ struct PositionView: View {
     }
     
     private func layoutGizmos(_ animate:Bool = false) {
-        var positions = Array(viewModel.gizmoPositions)
-        viewModel.gizmos.enumerated().forEach {
+        var positions = Array(positionViewModel.gizmoPositions)
+        positionViewModel.gizmos.enumerated().forEach {
             index, gizmo in
-            let position:simd_float3 = viewModel.gizmoPositions[index]
+            let position:simd_float3 = positionViewModel.gizmoPositions[index]
 
             if animate {
                 positions = positions.sorted {
@@ -264,7 +264,7 @@ struct PositionView: View {
                     let distanceL = distance(gizmoPosition, left)
                     let distanceR = distance(gizmoPosition, right)
                     
-                    return viewModel.animateToFarthest ? distanceL < distanceR : distanceL > distanceR
+                    return positionViewModel.animateToFarthest ? distanceL < distanceR : distanceL > distanceR
                 }
                 
                 if let closestPosition = positions.popLast() {
@@ -282,36 +282,36 @@ struct PositionView: View {
     var body: some View {
         RealityView { content, attachments in
             let headAnchor = AnchorEntity(.head)
-            headAnchor.position = [0.75, 0.3, -1]
             
             if let settingsMenu = attachments.entity(for: settingsMenuTag) {
+                settingsMenu.position = [0.75, 0.3, -1]
                 headAnchor.addChild(settingsMenu)
-                content.add(headAnchor)
             }
             
-            for _ in 1...viewModel.numGizmos {
-                let gizmo = buildSphere(viewModel.gizmoRadius, .gray)
-                viewModel.gizmos.append(gizmo)
+            content.add(headAnchor)
+
+            for _ in 1...positionViewModel.numGizmos {
+                let gizmo = buildSphere(positionViewModel.gizmoRadius, .gray)
+                positionViewModel.gizmos.append(gizmo)
                 content.add(gizmo)
             }
             
-            viewModel.updateGizmoPositions()
+            positionViewModel.updateGizmoPositions()
             layoutGizmos()
         }
         attachments: {
             Attachment(id: settingsMenuTag) {
-                SettingsMenuView(viewModel: viewModel)
+                SettingsMenuView(positionViewModel: positionViewModel)
                 .padding(40)
                 .glassBackgroundEffect()
             }
-            
         }
-        .onChange(of: viewModel.layoutShape) {
-            viewModel.updateGizmoPositions()
+        .onChange(of: positionViewModel.layoutShape) {
+            positionViewModel.updateGizmoPositions()
             layoutGizmos(true)
         }
-        .onChange(of: viewModel.shapeSpan) {
-            viewModel.updateGizmoPositions()
+        .onChange(of: positionViewModel.shapeSpan) {
+            positionViewModel.updateGizmoPositions()
             layoutGizmos(true)
         }
         .dragRotation()

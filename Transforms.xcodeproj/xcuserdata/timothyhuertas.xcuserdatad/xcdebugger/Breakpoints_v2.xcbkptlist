@@ -84,5 +84,68 @@
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "7FB7F7AE-A166-4C85-9AC3-0CBB97948215"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Transforms/Views/HomeView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "57"
+            endingLineNumber = "57"
+            landmarkName = "body"
+            landmarkType = "24">
+            <Locations>
+               <Location
+                  uuid = "7FB7F7AE-A166-4C85-9AC3-0CBB97948215 - 3c830e7b887044f2"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #3 () -&gt; _RealityKit_SwiftUI.Attachment&lt;&lt;&lt;opaque return type of SwiftUI.View.glassBackgroundEffect(displayMode: SwiftUI.GlassBackgroundDisplayMode) -&gt; some&gt;&gt;.0&gt; in Transforms.HomeView.body.getter : some"
+                  moduleName = "Transforms"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/timothyhuertas/workspace/Transforms/Transforms/Views/HomeView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "41"
+                  endingLineNumber = "41"
+                  offsetFromSymbolStart = "308">
+               </Location>
+               <Location
+                  uuid = "7FB7F7AE-A166-4C85-9AC3-0CBB97948215 - 8b5e4588b5d55d50"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 () -&gt; &lt;&lt;opaque return type of SwiftUI.View.glassBackgroundEffect(displayMode: SwiftUI.GlassBackgroundDisplayMode) -&gt; some&gt;&gt;.0 in closure #3 () -&gt; _RealityKit_SwiftUI.Attachment&lt;&lt;&lt;opaque return type of SwiftUI.View.glassBackgroundEffect(displayMode: SwiftUI.GlassBackgroundDisplayMode) -&gt; some&gt;&gt;.0&gt; in Transforms.HomeView.body.getter : some"
+                  moduleName = "Transforms"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/timothyhuertas/workspace/Transforms/Transforms/Views/HomeView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "41"
+                  endingLineNumber = "41"
+                  offsetFromSymbolStart = "424">
+               </Location>
+               <Location
+                  uuid = "7FB7F7AE-A166-4C85-9AC3-0CBB97948215 - 8b5e4588b5d55d50"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 () -&gt; &lt;&lt;opaque return type of SwiftUI.View.glassBackgroundEffect(displayMode: SwiftUI.GlassBackgroundDisplayMode) -&gt; some&gt;&gt;.0 in closure #3 () -&gt; _RealityKit_SwiftUI.Attachment&lt;&lt;&lt;opaque return type of SwiftUI.View.glassBackgroundEffect(displayMode: SwiftUI.GlassBackgroundDisplayMode) -&gt; some&gt;&gt;.0&gt; in Transforms.HomeView.body.getter : some"
+                  moduleName = "Transforms"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/timothyhuertas/workspace/Transforms/Transforms/Views/HomeView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "41"
+                  endingLineNumber = "41"
+                  offsetFromSymbolStart = "456">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
    </Breakpoints>
 </Bucket>
