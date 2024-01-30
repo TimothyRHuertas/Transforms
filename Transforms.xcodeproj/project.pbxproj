@@ -24,6 +24,9 @@
 		599C13502B6572E90069C04B /* HunterHuntedSystem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 599C134F2B6572E90069C04B /* HunterHuntedSystem.swift */; };
 		59FDB2B62B68B9FE001DD44B /* NavigationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59FDB2B52B68B9FE001DD44B /* NavigationView.swift */; };
 		59FDB2B82B68BA71001DD44B /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59FDB2B72B68BA71001DD44B /* ViewModel.swift */; };
+		59FDB2BA2B68C53D001DD44B /* ProximityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59FDB2B92B68C53D001DD44B /* ProximityView.swift */; };
+		59FDB2BC2B68C599001DD44B /* ProximityToComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59FDB2BB2B68C599001DD44B /* ProximityToComponent.swift */; };
+		59FDB2BE2B68C5D4001DD44B /* ProximityToSystem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59FDB2BD2B68C5D4001DD44B /* ProximityToSystem.swift */; };
 		59FE15922B61D1910083F7EE /* DragRotateSystem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59FE15912B61D1910083F7EE /* DragRotateSystem.swift */; };
 		59FE15942B61D1B00083F7EE /* DragRotateComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59FE15932B61D1B00083F7EE /* DragRotateComponent.swift */; };
 		59FE15962B61D97C0083F7EE /* DragParentComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59FE15952B61D97C0083F7EE /* DragParentComponent.swift */; };
@@ -63,6 +66,9 @@
 		599C134F2B6572E90069C04B /* HunterHuntedSystem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HunterHuntedSystem.swift; sourceTree = "<group>"; };
 		59FDB2B52B68B9FE001DD44B /* NavigationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationView.swift; sourceTree = "<group>"; };
 		59FDB2B72B68BA71001DD44B /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
+		59FDB2B92B68C53D001DD44B /* ProximityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProximityView.swift; sourceTree = "<group>"; };
+		59FDB2BB2B68C599001DD44B /* ProximityToComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProximityToComponent.swift; sourceTree = "<group>"; };
+		59FDB2BD2B68C5D4001DD44B /* ProximityToSystem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProximityToSystem.swift; sourceTree = "<group>"; };
 		59FE15912B61D1910083F7EE /* DragRotateSystem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DragRotateSystem.swift; sourceTree = "<group>"; };
 		59FE15932B61D1B00083F7EE /* DragRotateComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DragRotateComponent.swift; sourceTree = "<group>"; };
 		59FE15952B61D97C0083F7EE /* DragParentComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DragParentComponent.swift; sourceTree = "<group>"; };
@@ -165,6 +171,7 @@
 				599C134B2B65712D0069C04B /* HunterHuntedView.swift */,
 				599C13452B646B0F0069C04B /* ConnectView.swift */,
 				59FDB2B52B68B9FE001DD44B /* NavigationView.swift */,
+				59FDB2B92B68C53D001DD44B /* ProximityView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -177,6 +184,7 @@
 				59FE15972B61D9AF0083F7EE /* DragParentSystem.swift */,
 				599C13432B64359E0069C04B /* DragTransformSystem.swift */,
 				599C134F2B6572E90069C04B /* HunterHuntedSystem.swift */,
+				59FDB2BD2B68C5D4001DD44B /* ProximityToSystem.swift */,
 			);
 			path = Systems;
 			sourceTree = "<group>";
@@ -189,6 +197,7 @@
 				599C13412B64355C0069C04B /* DragTransformComponent.swift */,
 				599C13472B649CEC0069C04B /* ConnectToComponent.swift */,
 				599C134D2B6572D60069C04B /* HunterHuntedComponent.swift */,
+				59FDB2BB2B68C599001DD44B /* ProximityToComponent.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -308,6 +317,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				59FDB2B62B68B9FE001DD44B /* NavigationView.swift in Sources */,
+				59FDB2BE2B68C5D4001DD44B /* ProximityToSystem.swift in Sources */,
 				599C13422B64355C0069C04B /* DragTransformComponent.swift in Sources */,
 				599C13442B64359E0069C04B /* DragTransformSystem.swift in Sources */,
 				599C134A2B649D200069C04B /* ConnectToSystem.swift in Sources */,
@@ -325,6 +335,8 @@
 				59FE15982B61D9AF0083F7EE /* DragParentSystem.swift in Sources */,
 				599C13462B646B0F0069C04B /* ConnectView.swift in Sources */,
 				59FE15A12B6432010083F7EE /* DragParentModifier.swift in Sources */,
+				59FDB2BA2B68C53D001DD44B /* ProximityView.swift in Sources */,
+				59FDB2BC2B68C599001DD44B /* ProximityToComponent.swift in Sources */,
 				598D45CF2B61A7AB00B17C95 /* PositionView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

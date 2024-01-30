@@ -10,6 +10,7 @@ enum Views: String, CaseIterable, Identifiable {
     case position
     case chase
     case connect
+    case proximity
    
     var id: Self { self }
 }

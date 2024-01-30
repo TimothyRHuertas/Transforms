@@ -40,6 +40,8 @@ struct TransformsApp: App {
                 HunterHuntedView()
             case .connect:
                 ConnectView()
+            case .proximity:
+                ProximityView()
             }
         }
     }
