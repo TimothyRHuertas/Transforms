@@ -9,6 +9,19 @@ import SwiftUI
 import RealityKit
 
 struct RotateToMatchFloorView: View {
+    
+    init() {
+        RotateToHitSystem.registerSystem()
+        RotateToHitComponent.registerComponent()
+    }
+    
+    private func makeCollidable(_ entity:ModelEntity) {
+        if !entity.components.has(CollisionComponent.self) {
+            entity.generateCollisionShapes(recursive: true)
+            entity.components.set(CollisionComponent(shapes: entity.collision!.shapes))
+        }
+    }
+    
     var body: some View {
         RealityView {
             content in
@@ -22,12 +35,14 @@ struct RotateToMatchFloorView: View {
             var dragRotateComponent = DragRotateComponent()
             dragRotateComponent.rotateX = false
             entity.components.set(dragRotateComponent)
+            entity.components.set(RotateToHitComponent())
             content.add(entity)
             
             let hillMaterial = SimpleMaterial.init(color: .gray, isMetallic: true)
             let hillMesh = MeshResource.generateSphere(radius: 0.8)
             let hillEntity = ModelEntity(mesh: hillMesh, materials: [hillMaterial])
             hillEntity.position = [-1, 2.0, -2]
+            makeCollidable(hillEntity)
             content.add(hillEntity)
         }
         .dragParent()
