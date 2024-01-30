@@ -22,12 +22,14 @@ class ViewModel {
     let numGizmos = 12
     let gizmoRadius:Float = 0.1
     let layoutWidth:Float = 2.4
+    let shapeOfffset = simd_float3([0, 1.6, -2])
+    let animateToFarthest = true
     
     func updateGizmoPositions(curveFunction:(_:Float) -> Float) {
         gizmoPositions = gizmos.enumerated().map {
             index, gizmo in
             
-            return computeCurveLayout(value: index, maxValue: gizmos.count, curveFunction: curveFunction)
+            return computeCurveLayout(value: index, maxValue: gizmos.count, curveFunction: curveFunction) + shapeOfffset
         }
     }
     
@@ -35,8 +37,7 @@ class ViewModel {
         gizmoPositions = gizmos.enumerated().map {
             index, gizmo in
             
-            return switch shape {
-                
+            let position = switch shape {
             case .square:
                 computeSquareLayout(value: index, maxValue: gizmos.count)
             case .circle:
@@ -44,6 +45,8 @@ class ViewModel {
             case .x:
                 computeXLayout(value: index, maxValue: gizmos.count)
             }
+            
+            return position + shapeOfffset
         }
     }
     
@@ -91,8 +94,6 @@ class ViewModel {
     }
     
     func computeSquareLayout(value:Int, maxValue:Int) -> simd_float3 {
-        let valueF = Float(value)
-        let maxValueF = Float(maxValue)
         let gizmoDiameter = gizmoRadius * 2
         
         
@@ -194,16 +195,27 @@ struct PositionView: View {
         return entity
     }
     
-    
     private func layoutGizmos(_ animate:Bool = false) {
+        var positions = Array(viewModel.gizmoPositions)
         viewModel.gizmos.enumerated().forEach {
             index, gizmo in
-            var position:simd_float3 = viewModel.gizmoPositions[index]
-            position += [0, 1.6, -2]
+            let position:simd_float3 = viewModel.gizmoPositions[index]
+
             if animate {
-                var destination = gizmo.transform
-                destination.translation = position
-                gizmo.move(to: destination, relativeTo: gizmo.parent, duration: 1, timingFunction: .easeInOut)
+                positions = positions.sorted {
+                    left, right in
+                    let gizmoPosition = gizmo.position
+                    let distanceL = distance(gizmoPosition, left)
+                    let distanceR = distance(gizmoPosition, right)
+                    
+                    return viewModel.animateToFarthest ? distanceL < distanceR : distanceL > distanceR
+                }
+                
+                if let closestPosition = positions.popLast() {
+                    var destination = gizmo.transform
+                    destination.translation = closestPosition
+                    gizmo.move(to: destination, relativeTo: gizmo.parent, duration: 1, timingFunction: .easeInOut)
+                }
             }
             else {
                 gizmo.position = position
