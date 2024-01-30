@@ -12,7 +12,9 @@ import RealityKitContent
 enum LayoutShape: String, CaseIterable {
     case square = "Square"
     case circle = "Circle"
-    case x = "X"
+    case cross = "Cross"
+    case sin = "Sine"
+    case cos = "Cosine"
 }
 
 @Observable
@@ -39,11 +41,15 @@ class ViewModel {
             
             let position = switch shape {
             case .square:
-                computeSquareLayout(value: index, maxValue: gizmos.count)
+                computeSquareLayout(value: index, maxValue: numGizmos)
             case .circle:
-                computeCircleLayout(value: index, maxValue: gizmos.count)
-            case .x:
-                computeXLayout(value: index, maxValue: gizmos.count)
+                computeCircleLayout(value: index, maxValue: numGizmos)
+            case .cross:
+                computeXLayout(value: index, maxValue: numGizmos)
+            case .sin:
+                computeCurveLayout(value: index, maxValue: numGizmos, curveFunction: sinCurve)
+            case .cos:
+                computeCurveLayout(value: index, maxValue: numGizmos, curveFunction: cosCurve)
             }
             
             return position + shapeOfffset
@@ -59,6 +65,15 @@ class ViewModel {
         let y = radius * sin(radians)
                     
         return [x, y, 0]
+    }
+    
+    func sinCurve(_ progress: Float) -> Float {  
+        
+        return sin(2 * .pi * progress)
+    }
+    
+    func cosCurve(_ progress: Float) -> Float {
+        return cos(2 * .pi * progress)
     }
     
     // https://github.com/manuelCarlos/Easing/blob/main/Sources/Easing/Easing.swift#L170C24-L170C38
@@ -157,21 +172,6 @@ struct SettingsMenuView: View {
                     Button(value.rawValue) {
                         Task {
                             viewModel.updateGizmoPositions(shape: value)
-                        }
-                        
-                    }
-                }
-            }
-            
-            let curves:[Curve<Float>] = Array(Curve.allCases)
-
-            VStack {
-                ForEach(curves, id: \.self) {
-                    curve in
-                    Button(curve.rawValue) {
-                        Task {
-                            viewModel.updateGizmoPositions(curveFunction: curve.easeIn)
-
                         }
                         
                     }
