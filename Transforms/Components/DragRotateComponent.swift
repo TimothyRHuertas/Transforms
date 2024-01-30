@@ -5,7 +5,8 @@ import SwiftUI
 
 public struct DragRotateComponent: Component {
     var delta: simd_float3?
-    
+    var rotateX = true
+    var rotateY = true
     public init() {
     }
 }

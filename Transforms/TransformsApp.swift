@@ -42,6 +42,8 @@ struct TransformsApp: App {
                 ConnectView()
             case .proximity:
                 ProximityView()
+            case .rotateToMatchFloor:
+                RotateToMatchFloorView()
             }
         }
     }

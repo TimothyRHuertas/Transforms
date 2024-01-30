@@ -50,8 +50,14 @@ public struct DragRotateSystem: System {
                 let left = simd_normalize(cross(cameraUp, diff))
                 let yAxis = left.x > 0 ? -1 : 1
                 
-                entity.transform.rotation = simd_quatf(angle: rotX, axis: simd_float3([0, yAxis, 0])) * entity.transform.rotation
-                entity.transform.rotation = simd_quatf(angle: rotY, axis: left) * entity.transform.rotation
+                if(component.rotateX) {
+                    entity.transform.rotation = simd_quatf(angle: rotX, axis: simd_float3([0, yAxis, 0])) * entity.transform.rotation
+                }
+                
+                if(component.rotateY) {
+                    entity.transform.rotation = simd_quatf(angle: rotY, axis: left) * entity.transform.rotation
+
+                }
                 
                 entity.components[DragRotateComponent.self]?.delta = nil
             }

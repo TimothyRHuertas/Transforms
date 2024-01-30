@@ -11,6 +11,7 @@ enum Views: String, CaseIterable, Identifiable {
     case chase
     case connect
     case proximity
+    case rotateToMatchFloor
    
     var id: Self { self }
 }
@@ -18,5 +19,5 @@ enum Views: String, CaseIterable, Identifiable {
 @Observable
 class ViewModel {
     let navigationAttachamentId = "navigation"
-    var currentView:Views = .connect
+    var currentView:Views = .rotateToMatchFloor
 }

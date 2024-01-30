@@ -29,6 +29,7 @@
 		59FDB2BE2B68C5D4001DD44B /* ProximityToSystem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59FDB2BD2B68C5D4001DD44B /* ProximityToSystem.swift */; };
 		59FDB2C02B698DFE001DD44B /* LineComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59FDB2BF2B698DFE001DD44B /* LineComponent.swift */; };
 		59FDB2C22B698E77001DD44B /* LineSystem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59FDB2C12B698E77001DD44B /* LineSystem.swift */; };
+		59FDB2C42B6994B7001DD44B /* RotateToMatchFloorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59FDB2C32B6994B7001DD44B /* RotateToMatchFloorView.swift */; };
 		59FE15922B61D1910083F7EE /* DragRotateSystem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59FE15912B61D1910083F7EE /* DragRotateSystem.swift */; };
 		59FE15942B61D1B00083F7EE /* DragRotateComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59FE15932B61D1B00083F7EE /* DragRotateComponent.swift */; };
 		59FE15962B61D97C0083F7EE /* DragParentComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59FE15952B61D97C0083F7EE /* DragParentComponent.swift */; };
@@ -73,6 +74,7 @@
 		59FDB2BD2B68C5D4001DD44B /* ProximityToSystem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProximityToSystem.swift; sourceTree = "<group>"; };
 		59FDB2BF2B698DFE001DD44B /* LineComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LineComponent.swift; sourceTree = "<group>"; };
 		59FDB2C12B698E77001DD44B /* LineSystem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LineSystem.swift; sourceTree = "<group>"; };
+		59FDB2C32B6994B7001DD44B /* RotateToMatchFloorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RotateToMatchFloorView.swift; sourceTree = "<group>"; };
 		59FE15912B61D1910083F7EE /* DragRotateSystem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DragRotateSystem.swift; sourceTree = "<group>"; };
 		59FE15932B61D1B00083F7EE /* DragRotateComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DragRotateComponent.swift; sourceTree = "<group>"; };
 		59FE15952B61D97C0083F7EE /* DragParentComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DragParentComponent.swift; sourceTree = "<group>"; };
@@ -176,6 +178,7 @@
 				599C13452B646B0F0069C04B /* ConnectView.swift */,
 				59FDB2B52B68B9FE001DD44B /* NavigationView.swift */,
 				59FDB2B92B68C53D001DD44B /* ProximityView.swift */,
+				59FDB2C32B6994B7001DD44B /* RotateToMatchFloorView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -330,6 +333,7 @@
 				599C13502B6572E90069C04B /* HunterHuntedSystem.swift in Sources */,
 				598D45CD2B61A7AB00B17C95 /* ContentView.swift in Sources */,
 				59FE15922B61D1910083F7EE /* DragRotateSystem.swift in Sources */,
+				59FDB2C42B6994B7001DD44B /* RotateToMatchFloorView.swift in Sources */,
 				59FDB2C22B698E77001DD44B /* LineSystem.swift in Sources */,
 				599C134C2B65712D0069C04B /* HunterHuntedView.swift in Sources */,
 				599C13482B649CEC0069C04B /* ConnectToComponent.swift in Sources */,

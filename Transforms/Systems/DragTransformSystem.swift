@@ -49,6 +49,7 @@ public struct DragTransformSystem: System {
         let lineLength:Float = 0.5
         let lineOffset:Float = lineLength/2
         
+        
         for entity in entities {
             entity.components[DragTransformComponent.self]?.shouldInit = false
 
