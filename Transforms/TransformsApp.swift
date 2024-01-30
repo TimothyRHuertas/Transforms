@@ -22,6 +22,9 @@ struct TransformsApp: App {
         
         ConnectToComponent.registerComponent()
         ConnectToSystem.registerSystem()
+        
+        LineComponent.registerComponent()
+        LineSystem.registerSystem()
     }
     
     var body: some Scene {
