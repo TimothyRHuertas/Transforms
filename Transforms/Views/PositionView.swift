@@ -9,37 +9,49 @@ import SwiftUI
 import RealityKit
 import RealityKitContent
 
-enum LayoutShape: String, CaseIterable {
+enum LayoutShape: String, CaseIterable, Identifiable {
     case square = "Square"
     case circle = "Circle"
     case cross = "Cross"
     case sin = "Sine"
     case cos = "Cosine"
+    
+    var id: Self { self }
+}
+
+enum ShapeSpan: String, CaseIterable, Identifiable {
+    case width = "Width"
+    case height = "Height"
+    case depth = "Depth"
+   
+    var id: Self { self }
 }
 
 @Observable
 class ViewModel {
     var gizmoPositions: [simd_float3] = .init()
+    var layoutShape:LayoutShape = .circle
+    var shapeSpan:ShapeSpan = .width
     var gizmos:[Entity] = .init()
     let numGizmos = 12
     let gizmoRadius:Float = 0.1
-    let layoutWidth:Float = 2.4
+    let layoutWidth:Float = 2.2
     let shapeOfffset = simd_float3([0, 1.6, -2])
-    let animateToFarthest = true
+    var animateToFarthest = true
     
     func updateGizmoPositions(curveFunction:(_:Float) -> Float) {
         gizmoPositions = gizmos.enumerated().map {
             index, gizmo in
             
-            return computeCurveLayout(value: index, maxValue: gizmos.count, curveFunction: curveFunction) + shapeOfffset
+            return computeCurveLayout(value: index, maxValue: gizmos.count, curveFunction: curveFunction)
         }
     }
     
-    func updateGizmoPositions(shape:LayoutShape) {
+    func updateGizmoPositions() {
         gizmoPositions = gizmos.enumerated().map {
             index, gizmo in
             
-            let position = switch shape {
+            let pos = switch layoutShape {
             case .square:
                 computeSquareLayout(value: index, maxValue: numGizmos)
             case .circle:
@@ -50,6 +62,18 @@ class ViewModel {
                 computeCurveLayout(value: index, maxValue: numGizmos, curveFunction: sinCurve)
             case .cos:
                 computeCurveLayout(value: index, maxValue: numGizmos, curveFunction: cosCurve)
+            }
+            
+            let x = pos.x
+            let y = pos.y
+            let z = pos.z
+            let position:simd_float3 = switch(shapeSpan) {
+            case .width:
+                [x, y, z]
+            case .height:
+                [z, y, x]
+            case .depth:
+                [x, z, y]
             }
             
             return position + shapeOfffset
@@ -138,8 +162,6 @@ class ViewModel {
             let numValuesForSides = Float(maxValue - 4)
             let valuesPerVerticle = ceil(numValuesForSides / 4)
             let position = value / 4
-
-            print("vpv", valuesPerVerticle)
             
             if(isVerticle) {
                 let numSpaces = valuesPerVerticle + 1
@@ -167,30 +189,58 @@ class ViewModel {
     }
 }
 
-let viewModel = ViewModel()
 
 struct SettingsMenuView: View {
+    @State private var viewModel:ViewModel
+    @State private var foo = true
+    init(viewModel: ViewModel) {
+        self.viewModel = viewModel
+    }
+    
     var body: some View {
-        HStack {
-            VStack {
-                ForEach(Array(LayoutShape.allCases), id: \.self) {
-                    value in
-                    Button(value.rawValue) {
-                        Task {
-                            viewModel.updateGizmoPositions(shape: value)
-                        }
-                        
-                    }
+        VStack {
+            Text("Settings").font(.largeTitle)
+            Toggle(isOn: $viewModel.animateToFarthest, label: {
+                Text("Farthest path")
+            })
+            HStack {
+                Text("Shape")
+                Spacer()
+            }
+            Picker("Shape", selection: $viewModel.layoutShape) {
+                ForEach(LayoutShape.allCases) { shape in
+                    Text(shape.rawValue.capitalized)
                 }
             }
+            .pickerStyle(.inline)
+            .scaledToFit()
+            
+            HStack {
+                Text("Span")
+                Spacer()
+            }
+            
+            Picker("Span", selection: $viewModel.shapeSpan) {
+                ForEach(ShapeSpan.allCases) { span in
+                    Text(span.rawValue.capitalized)
+                }
+            }
+            .pickerStyle(.inline)
+            .scaledToFit()
         }
+        .frame(maxWidth: 400)
+        .padding(20)
+        
     }
+    
+
     
 }
 
 struct PositionView: View {
     let settingsMenuTag = "settingsMenu"
-    
+    @State private var viewModel = ViewModel()
+
     private func buildSphere(_ radius:Float, _ color:UIColor) -> Entity {
         let material = SimpleMaterial.init(color: color, isMetallic: true)
         let mesh = MeshResource.generateSphere(radius: radius)
@@ -245,18 +295,23 @@ struct PositionView: View {
                 content.add(gizmo)
             }
             
-            viewModel.updateGizmoPositions(shape: .sin)
+            viewModel.updateGizmoPositions()
             layoutGizmos()
         }
         attachments: {
             Attachment(id: settingsMenuTag) {
-                SettingsMenuView()
+                SettingsMenuView(viewModel: viewModel)
                 .padding(40)
                 .glassBackgroundEffect()
             }
             
         }
-        .onChange(of: viewModel.gizmoPositions) {
+        .onChange(of: viewModel.layoutShape) {
+            viewModel.updateGizmoPositions()
+            layoutGizmos(true)
+        }
+        .onChange(of: viewModel.shapeSpan) {
+            viewModel.updateGizmoPositions()
             layoutGizmos(true)
         }
         .dragRotation()
