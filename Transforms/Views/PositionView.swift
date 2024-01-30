@@ -68,12 +68,17 @@ class ViewModel {
     }
     
     func sinCurve(_ progress: Float) -> Float {  
-        
-        return sin(2 * .pi * progress)
+        let xWdith:Float = 4
+        let factor = xWdith * progress - xWdith / 2
+
+        return sin(factor * .pi/2)
     }
     
     func cosCurve(_ progress: Float) -> Float {
-        return cos(2 * .pi * progress)
+        let xWdith:Float = 4
+        let factor = xWdith * progress - xWdith / 2
+
+        return cos(factor * .pi/2)
     }
     
     // https://github.com/manuelCarlos/Easing/blob/main/Sources/Easing/Easing.swift#L170C24-L170C38
@@ -86,9 +91,10 @@ class ViewModel {
         let totalWidthOccupiedByGizmos = numSpacesNeeded * gizmoDiameter
         let gizmoPadding = (totalWidth - totalWidthOccupiedByGizmos) / numSpacesNeeded
         let x = (gizmoPadding * valueF) + (gizmoDiameter * valueF)
-        let y = curveFunction(x / totalWidth)
+        let progress = x / layoutWidth
+        let y = curveFunction(progress)  / 2
         let offset:Float = x - totalWidth/2
-        
+
         return [offset, y, 0]
     }
     
@@ -239,7 +245,7 @@ struct PositionView: View {
                 content.add(gizmo)
             }
             
-            viewModel.updateGizmoPositions(shape: .square)
+            viewModel.updateGizmoPositions(shape: .sin)
             layoutGizmos()
         }
         attachments: {
