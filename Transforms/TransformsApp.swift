@@ -20,9 +20,6 @@ struct TransformsApp: App {
         DragTransformComponent.registerComponent()
         DragTransformSystem.registerSystem()
         
-        ConnectToComponent.registerComponent()
-        ConnectToSystem.registerSystem()
-        
         LineComponent.registerComponent()
         LineSystem.registerSystem()
     }

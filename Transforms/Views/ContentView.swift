@@ -17,6 +17,11 @@ struct ContentView: View {
     @Environment(\.openImmersiveSpace) var openImmersiveSpace
     @Environment(\.dismissImmersiveSpace) var dismissImmersiveSpace
     @Environment(\.dismissWindow) var dismissWindow
+    
+    init() {
+        ConnectToComponent.registerComponent()
+        ConnectToSystem.registerSystem()
+    }
 
     var body: some View {
         VStack {
