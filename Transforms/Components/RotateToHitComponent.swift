@@ -9,6 +9,7 @@ import RealityKit
 
 public struct RotateToHitComponent: Component {
     var entityName:String
+    var previousRotation:simd_quatf?
     
     public init(entityName:String) {
         self.entityName = entityName

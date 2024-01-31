@@ -38,6 +38,8 @@ public struct RotateToHitSystem: System {
         
         for entity in entities {
             guard let component = entity.components[RotateToHitComponent.self] else {return}
+//            guard let parent = entity.parent else {return}
+
             let position = entity.position
 //            let entityDown = position - [0, 1, 0]
 //            let result = scene.raycast(from: position, to: entityDown)
@@ -46,8 +48,16 @@ public struct RotateToHitSystem: System {
             let floorHit = result.first(where: {$0.entity.name == component.entityName})
             
             if let floorHit = floorHit {
+                if(component.previousRotation == nil) {
+                    entity.components[RotateToHitComponent.self]?.previousRotation = entity.transform.rotation
+                }
                 let normal = floorHit.normal
                 entity.transform.rotation = simd_quatf(from: [0, 1, 0], to: normal)
+//                drawLine(parent, "line", position, normal)
+            }
+            else if let previousRotation = component.previousRotation {
+                entity.transform.rotation = previousRotation
+                entity.components[RotateToHitComponent.self]?.previousRotation = nil
             }
             
         }

@@ -27,21 +27,21 @@ struct RotateToMatchFloorView: View {
             content in
             
             let material = SimpleMaterial.init(color: .red, isMetallic: true)
-            let mesh = MeshResource.generateBox(size: 0.5)
+            let mesh = MeshResource.generateBox(size: 0.3)
             let entity = ModelEntity(mesh: mesh, materials: [material])
-            entity.position = [1, 1, -2]
+            entity.position = [1, 0.5, -3]
             entity.components.set(DragTransformComponent())
             content.add(entity)
             
             let hillMaterial = SimpleMaterial.init(color: .gray, isMetallic: true)
-            let meshDepth:Float = 4.0
-            let meshWidth:Float = 4.0
+            let meshDepth:Float = 1.0
+            let meshWidth:Float = 3.0
             let hillMesh = MeshResource.generateBox(width: meshWidth, height: 0.001, depth: meshDepth)
             let hillEntity = ModelEntity(mesh: hillMesh, materials: [hillMaterial])
             hillEntity.position = [-meshWidth/2, 0, 0]
             let hillParent = ModelEntity()
             hillParent.addChild(hillEntity)
-            hillParent.position = [0, 0, -2]
+            hillParent.position = [0, 0, -3]
             hillParent.transform.rotation = simd_quatf(.init(angle: .degrees(-45), axis: .z))
             hillEntity.name = "floor"
             makeCollidable(hillEntity)
