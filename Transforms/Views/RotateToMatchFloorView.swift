@@ -26,12 +26,12 @@ struct RotateToMatchFloorView: View {
         RealityView {
             content in
             
-            let material = SimpleMaterial.init(color: .gray, isMetallic: true)
-            let mesh = MeshResource.generateBox(size: 0.2)
+            let material = SimpleMaterial.init(color: .red, isMetallic: true)
+            let mesh = MeshResource.generateBox(size: 0.5)
             let entity = ModelEntity(mesh: mesh, materials: [material])
-            entity.position = [1, 1.5, -2]
+            entity.position = [1, 1, -2]
             entity.components.set(DragTransformComponent())
-            entity.transform.rotation = simd_quatf(.init(angle: .degrees(-90), axis: .y))
+//            entity.transform.rotation = simd_quatf(.init(angle: .degrees(-90), axis: .y))
             var dragRotateComponent = DragRotateComponent()
             dragRotateComponent.rotateX = false
             entity.components.set(dragRotateComponent)
@@ -39,12 +39,18 @@ struct RotateToMatchFloorView: View {
             content.add(entity)
             
             let hillMaterial = SimpleMaterial.init(color: .gray, isMetallic: true)
-            let hillMesh = MeshResource.generateSphere(radius: 0.8)
+            let meshDepth:Float = 4.0
+            let meshWidth:Float = 10
+            let hillMesh = MeshResource.generateBox(width: meshWidth, height: 0.001, depth: meshDepth)
             let hillEntity = ModelEntity(mesh: hillMesh, materials: [hillMaterial])
-            hillEntity.position = [-1, 0, -2]
+            hillEntity.position = [-meshWidth/2, 0, 0]
+            let hillParent = ModelEntity()
+            hillParent.addChild(hillEntity)
+            hillParent.position = [0, 0, -2]
+            hillParent.transform.rotation = simd_quatf(.init(angle: .degrees(-45), axis: .z))
             hillEntity.name = "floor"
             makeCollidable(hillEntity)
-            content.add(hillEntity)
+            content.add(hillParent)
         }
         .dragParent()
         .dragRotation()

@@ -46,11 +46,10 @@ public struct RotateToHitSystem: System {
             let floorHit = result.first(where: {$0.entity.name == "floor"})
             
             if let floorHit = floorHit {
-                print("tim", floorHit.entity.name)
-                let normal = floorHit.normal//entity.convert(normal: floorHit.normal, to: nil)
-                drawLine(parent, "normal", position, normal)
+                let normal = floorHit.normal
+                print("tim", normal, result.count)
 
-                entity.transform.rotation *= simd_quatf(from: [0, 1, 0], to: normal)
+                entity.transform.rotation = simd_quatf(from: [0, 1, 0], to: normal)
             }
             
         }
