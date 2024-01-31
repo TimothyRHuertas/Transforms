@@ -37,12 +37,13 @@ public struct RotateToHitSystem: System {
         let entities = scene.performQuery(Self.query)
         
         for entity in entities {
+            guard let component = entity.components[RotateToHitComponent.self] else {return}
             let position = entity.position
 //            let entityDown = position - [0, 1, 0]
 //            let result = scene.raycast(from: position, to: entityDown)
             let result = scene.raycast(origin: position, direction: [0, -1, 0], relativeTo: entity.parent)
 
-            let floorHit = result.first(where: {$0.entity.name == "floor"})
+            let floorHit = result.first(where: {$0.entity.name == component.entityName})
             
             if let floorHit = floorHit {
                 let normal = floorHit.normal

@@ -31,7 +31,6 @@ struct RotateToMatchFloorView: View {
             let entity = ModelEntity(mesh: mesh, materials: [material])
             entity.position = [1, 1, -2]
             entity.components.set(DragTransformComponent())
-            entity.components.set(RotateToHitComponent())
             content.add(entity)
             
             let hillMaterial = SimpleMaterial.init(color: .gray, isMetallic: true)
@@ -46,6 +45,8 @@ struct RotateToMatchFloorView: View {
             hillParent.transform.rotation = simd_quatf(.init(angle: .degrees(-45), axis: .z))
             hillEntity.name = "floor"
             makeCollidable(hillEntity)
+            entity.components.set(RotateToHitComponent(entityName: hillEntity.name))
+
             content.add(hillParent)
         }
         .dragParent()

@@ -8,7 +8,9 @@
 import RealityKit
 
 public struct RotateToHitComponent: Component {
+    var entityName:String
     
-    public init() {
+    public init(entityName:String) {
+        self.entityName = entityName
     }
 }
