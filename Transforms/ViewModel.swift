@@ -19,5 +19,5 @@ enum Views: String, CaseIterable, Identifiable {
 @Observable
 class ViewModel {
     let navigationAttachamentId = "navigation"
-    var currentView:Views = .proximity
+    var currentView:Views = .rotateToMatchFloor
 }
