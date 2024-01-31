@@ -37,18 +37,15 @@ public struct RotateToHitSystem: System {
         let entities = scene.performQuery(Self.query)
         
         for entity in entities {
-            guard let parent = entity.parent else {return}
-            
             let position = entity.position
-            let entityDown = position - [0, 1, 0]
-            drawLine(parent, "downLine", position, entityDown)
-            let result = scene.raycast(from: position, to: entityDown)
+//            let entityDown = position - [0, 1, 0]
+//            let result = scene.raycast(from: position, to: entityDown)
+            let result = scene.raycast(origin: position, direction: [0, -1, 0], relativeTo: entity.parent)
+
             let floorHit = result.first(where: {$0.entity.name == "floor"})
             
             if let floorHit = floorHit {
                 let normal = floorHit.normal
-                print("tim", normal, result.count)
-
                 entity.transform.rotation = simd_quatf(from: [0, 1, 0], to: normal)
             }
             

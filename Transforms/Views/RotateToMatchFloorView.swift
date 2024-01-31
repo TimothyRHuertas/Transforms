@@ -31,16 +31,12 @@ struct RotateToMatchFloorView: View {
             let entity = ModelEntity(mesh: mesh, materials: [material])
             entity.position = [1, 1, -2]
             entity.components.set(DragTransformComponent())
-//            entity.transform.rotation = simd_quatf(.init(angle: .degrees(-90), axis: .y))
-            var dragRotateComponent = DragRotateComponent()
-            dragRotateComponent.rotateX = false
-            entity.components.set(dragRotateComponent)
             entity.components.set(RotateToHitComponent())
             content.add(entity)
             
             let hillMaterial = SimpleMaterial.init(color: .gray, isMetallic: true)
             let meshDepth:Float = 4.0
-            let meshWidth:Float = 10
+            let meshWidth:Float = 4.0
             let hillMesh = MeshResource.generateBox(width: meshWidth, height: 0.001, depth: meshDepth)
             let hillEntity = ModelEntity(mesh: hillMesh, materials: [hillMaterial])
             hillEntity.position = [-meshWidth/2, 0, 0]
@@ -53,7 +49,6 @@ struct RotateToMatchFloorView: View {
             content.add(hillParent)
         }
         .dragParent()
-        .dragRotation()
     }
 }
 
