@@ -7,10 +7,10 @@
 import SwiftUI
 
 enum Views: String, CaseIterable, Identifiable {
+    case proximity
     case position
     case chase
     case connect
-    case proximity
     case rotateToMatchFloor
    
     var id: Self { self }
@@ -19,5 +19,5 @@ enum Views: String, CaseIterable, Identifiable {
 @Observable
 class ViewModel {
     let navigationAttachamentId = "navigation"
-    var currentView:Views = .rotateToMatchFloor
+    var currentView:Views = .proximity
 }
