@@ -17,6 +17,8 @@ public struct DragTransformSystem: System {
         let material = SimpleMaterial.init(color: color, isMetallic: true)
         let mesh = MeshResource.generateCylinder(height: height, radius: 0.02)
         let entity = ModelEntity(mesh: mesh, materials: [material])
+        entity.generateCollisionShapes(recursive: true)
+        entity.components.set(CollisionComponent(shapes: entity.collision!.shapes))
         makeDragable(entity)
         
         return entity
@@ -38,8 +40,7 @@ public struct DragTransformSystem: System {
         }
            
         if !entity.components.has(CollisionComponent.self) {
-            entity.generateCollisionShapes(recursive: true)
-            entity.components.set(CollisionComponent(shapes: entity.collision!.shapes))
+            print("Warning: no collision component")
         }
     }
     

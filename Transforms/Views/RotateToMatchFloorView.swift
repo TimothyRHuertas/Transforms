@@ -15,22 +15,17 @@ struct RotateToMatchFloorView: View {
         RotateToHitComponent.registerComponent()
     }
     
-    private func makeCollidable(_ entity:ModelEntity) {
-        if !entity.components.has(CollisionComponent.self) {
-            entity.generateCollisionShapes(recursive: true)
-            entity.components.set(CollisionComponent(shapes: entity.collision!.shapes))
-        }
-    }
-    
     var body: some View {
         RealityView {
             content in
             
             let material = SimpleMaterial.init(color: .red, isMetallic: true)
-            let mesh = MeshResource.generateBox(size: 0.3)
+            let boxSize:Float = 0.3
+            let mesh = MeshResource.generateBox(size: boxSize)
             let entity = ModelEntity(mesh: mesh, materials: [material])
             entity.position = [1, 0.5, -3]
             entity.components.set(DragTransformComponent())
+            entity.components.set(CollisionComponent(shapes: [ShapeResource.generateBox(size: mesh.bounds.extents)]))
             content.add(entity)
             
             let hillMaterial = SimpleMaterial.init(color: .gray, isMetallic: true)
@@ -44,7 +39,10 @@ struct RotateToMatchFloorView: View {
             hillParent.position = [0, 0, -3]
             hillParent.transform.rotation = simd_quatf(.init(angle: .degrees(-45), axis: .z))
             hillEntity.name = "floor"
-            makeCollidable(hillEntity)
+            if !hillEntity.components.has(CollisionComponent.self) {
+                hillEntity.generateCollisionShapes(recursive: true)
+                hillEntity.components.set(CollisionComponent(shapes: [ShapeResource.generateBox(size: hillMesh.bounds.extents)]))
+            }
             entity.components.set(RotateToHitComponent(entityName: hillEntity.name))
 
             content.add(hillParent)

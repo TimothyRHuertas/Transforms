@@ -21,6 +21,7 @@ struct HunterHuntedView: View {
         let entity = ModelEntity(mesh: mesh, materials: [material])
         entity.components.set(DragRotateComponent())
         entity.components.set(DragTransformComponent())
+        entity.components.set(CollisionComponent(shapes: [ShapeResource.generateSphere(radius: radius)]))
 
         return entity
     }
