@@ -33,7 +33,6 @@ struct TransformsApp: App {
             NavigationView().environment(viewModel)
             
             switch viewModel.currentView {
-                
             case .position:
                 PositionView()
             case .chase:
@@ -44,6 +43,8 @@ struct TransformsApp: App {
                 ProximityView()
             case .rotateToMatchFloor:
                 RotateToMatchFloorView()
+            case .orbit:
+                OrbitView()
             }
         }
     }

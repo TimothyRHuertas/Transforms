@@ -14,6 +14,10 @@
 		598D45D12B61A7AE00B17C95 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 598D45D02B61A7AE00B17C95 /* Assets.xcassets */; };
 		598D45D42B61A7AE00B17C95 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 598D45D32B61A7AE00B17C95 /* Preview Assets.xcassets */; };
 		598D45DF2B61A7AF00B17C95 /* TransformsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 598D45DE2B61A7AF00B17C95 /* TransformsTests.swift */; };
+		59987C282B6C107400B7D5CC /* OrbitComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59987C272B6C107400B7D5CC /* OrbitComponent.swift */; };
+		59987C2A2B6C10FA00B7D5CC /* OrbitSystem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59987C292B6C10FA00B7D5CC /* OrbitSystem.swift */; };
+		59987C2C2B6C118300B7D5CC /* OrbitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59987C2B2B6C118300B7D5CC /* OrbitView.swift */; };
+		59987C2F2B6C11E100B7D5CC /* BuildSphere.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59987C2E2B6C11E100B7D5CC /* BuildSphere.swift */; };
 		599C13422B64355C0069C04B /* DragTransformComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 599C13412B64355C0069C04B /* DragTransformComponent.swift */; };
 		599C13442B64359E0069C04B /* DragTransformSystem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 599C13432B64359E0069C04B /* DragTransformSystem.swift */; };
 		599C13462B646B0F0069C04B /* ConnectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 599C13452B646B0F0069C04B /* ConnectView.swift */; };
@@ -61,6 +65,10 @@
 		598D45D52B61A7AE00B17C95 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		598D45DA2B61A7AF00B17C95 /* TransformsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TransformsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		598D45DE2B61A7AF00B17C95 /* TransformsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransformsTests.swift; sourceTree = "<group>"; };
+		59987C272B6C107400B7D5CC /* OrbitComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrbitComponent.swift; sourceTree = "<group>"; };
+		59987C292B6C10FA00B7D5CC /* OrbitSystem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrbitSystem.swift; sourceTree = "<group>"; };
+		59987C2B2B6C118300B7D5CC /* OrbitView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrbitView.swift; sourceTree = "<group>"; };
+		59987C2E2B6C11E100B7D5CC /* BuildSphere.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuildSphere.swift; sourceTree = "<group>"; };
 		599C13412B64355C0069C04B /* DragTransformComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DragTransformComponent.swift; sourceTree = "<group>"; };
 		599C13432B64359E0069C04B /* DragTransformSystem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DragTransformSystem.swift; sourceTree = "<group>"; };
 		599C13452B646B0F0069C04B /* ConnectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectView.swift; sourceTree = "<group>"; };
@@ -129,6 +137,7 @@
 		598D45C52B61A7AB00B17C95 /* Transforms */ = {
 			isa = PBXGroup;
 			children = (
+				59987C2D2B6C11CA00B7D5CC /* Utils */,
 				59FDB2B22B689323001DD44B /* Views */,
 				59FE159D2B642F440083F7EE /* Modifiers */,
 				59FE15902B61D1750083F7EE /* Components */,
@@ -166,6 +175,14 @@
 			path = TransformsTests;
 			sourceTree = "<group>";
 		};
+		59987C2D2B6C11CA00B7D5CC /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				59987C2E2B6C11E100B7D5CC /* BuildSphere.swift */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
 		59B0E9872B66F45B00B6774D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -182,6 +199,7 @@
 				599C13452B646B0F0069C04B /* ConnectView.swift */,
 				59FDB2B52B68B9FE001DD44B /* NavigationView.swift */,
 				59FDB2B92B68C53D001DD44B /* ProximityView.swift */,
+				59987C2B2B6C118300B7D5CC /* OrbitView.swift */,
 				59FDB2C32B6994B7001DD44B /* RotateToMatchFloorView.swift */,
 			);
 			path = Views;
@@ -192,6 +210,7 @@
 			children = (
 				59FE15912B61D1910083F7EE /* DragRotateSystem.swift */,
 				599C13492B649D200069C04B /* ConnectToSystem.swift */,
+				59987C292B6C10FA00B7D5CC /* OrbitSystem.swift */,
 				59FE15972B61D9AF0083F7EE /* DragParentSystem.swift */,
 				599C13432B64359E0069C04B /* DragTransformSystem.swift */,
 				599C134F2B6572E90069C04B /* HunterHuntedSystem.swift */,
@@ -207,6 +226,7 @@
 			children = (
 				59FE15932B61D1B00083F7EE /* DragRotateComponent.swift */,
 				59FE15952B61D97C0083F7EE /* DragParentComponent.swift */,
+				59987C272B6C107400B7D5CC /* OrbitComponent.swift */,
 				599C13412B64355C0069C04B /* DragTransformComponent.swift */,
 				599C13472B649CEC0069C04B /* ConnectToComponent.swift */,
 				59FDB2BF2B698DFE001DD44B /* LineComponent.swift */,
@@ -337,9 +357,12 @@
 				599C13442B64359E0069C04B /* DragTransformSystem.swift in Sources */,
 				599C134A2B649D200069C04B /* ConnectToSystem.swift in Sources */,
 				599C13502B6572E90069C04B /* HunterHuntedSystem.swift in Sources */,
+				59987C282B6C107400B7D5CC /* OrbitComponent.swift in Sources */,
 				598D45CD2B61A7AB00B17C95 /* ContentView.swift in Sources */,
 				59FE15922B61D1910083F7EE /* DragRotateSystem.swift in Sources */,
+				59987C2C2B6C118300B7D5CC /* OrbitView.swift in Sources */,
 				59FDB2C82B699BD3001DD44B /* RotateToHitComponent.swift in Sources */,
+				59987C2F2B6C11E100B7D5CC /* BuildSphere.swift in Sources */,
 				59FDB2C42B6994B7001DD44B /* RotateToMatchFloorView.swift in Sources */,
 				59FDB2C22B698E77001DD44B /* LineSystem.swift in Sources */,
 				599C134C2B65712D0069C04B /* HunterHuntedView.swift in Sources */,
@@ -350,6 +373,7 @@
 				59FDB2C02B698DFE001DD44B /* LineComponent.swift in Sources */,
 				598D45CB2B61A7AB00B17C95 /* TransformsApp.swift in Sources */,
 				59FE15962B61D97C0083F7EE /* DragParentComponent.swift in Sources */,
+				59987C2A2B6C10FA00B7D5CC /* OrbitSystem.swift in Sources */,
 				59FDB2C62B699BC4001DD44B /* RotateToHitSystem.swift in Sources */,
 				59FE15942B61D1B00083F7EE /* DragRotateComponent.swift in Sources */,
 				59FE15982B61D9AF0083F7EE /* DragParentSystem.swift in Sources */,

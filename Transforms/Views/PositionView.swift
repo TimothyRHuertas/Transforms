@@ -241,18 +241,6 @@ struct PositionView: View {
     let settingsMenuTag = "settingsMenu"
     @State private var positionViewModel = PositionViewModel()
     
-    private func buildSphere(_ radius:Float, _ color:UIColor) -> Entity {
-        let material = SimpleMaterial.init(color: color, isMetallic: true)
-        let mesh = MeshResource.generateSphere(radius: radius)
-        let entity = ModelEntity(mesh: mesh, materials: [material])
-//        entity.components.set(DragRotateComponent())
-//        entity.components.set(DragTransformComponent())
-//        entity.components.set(CollisionComponent(shapes: [ShapeResource.generateSphere(radius: radius)]))
-
-
-        return entity
-    }
-    
     private func layoutGizmos(_ animate:Bool = false) {
         var positions = Array(positionViewModel.gizmoPositions)
         positionViewModel.gizmos.enumerated().forEach {
@@ -293,7 +281,7 @@ struct PositionView: View {
             content.add(headAnchor)
 
             for _ in 1...positionViewModel.numGizmos {
-                let gizmo = buildSphere(positionViewModel.gizmoRadius, .gray)
+                let gizmo = BuildSphere.buildSphere(positionViewModel.gizmoRadius, .gray, isDraggable: false, isRotateable: false)
                 positionViewModel.gizmos.append(gizmo)
                 content.add(gizmo)
             }

@@ -23,16 +23,6 @@ public struct DragTransformSystem: System {
         
         return entity
     }
-    
-    private func buildSphere(_ radius:Float, _ color:UIColor) -> Entity {
-        let material = SimpleMaterial.init(color: color, isMetallic: true)
-        let mesh = MeshResource.generateSphere(radius: radius)
-        let entity = ModelEntity(mesh: mesh, materials: [material])
-        makeDragable(entity)
-        entity.components.set(DragRotateComponent())
-
-        return entity
-    }
         
     private func makeDragable(_ entity:ModelEntity) {
         if !entity.components.has(InputTargetComponent.self) {
