@@ -18,11 +18,12 @@ struct OrbitView: View {
         RealityView {
             content in
             let gizmo = BuildSphere.buildSphere(0.1, UIColor.green)
-            gizmo.position = [1, 2, -2]
+            gizmo.position = [1, 1, -2]
             content.add(gizmo)
             
-            let gizmo2 = BuildSphere.buildSphere(0.1, UIColor.gray)
-            gizmo2.position = [-1, 1, -3]
+            let gizmo2 = BuildSphere.buildSphere(0.1, UIColor.gray, isDraggable: false, isRotateable: false)
+
+            gizmo2.components.set(OrbitComponent(orbits: gizmo))
             content.add(gizmo2)
         }
         .dragRotation()

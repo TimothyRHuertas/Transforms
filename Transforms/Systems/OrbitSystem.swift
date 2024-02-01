@@ -6,6 +6,7 @@
 //
 
 import RealityKit
+import Foundation
 
 public struct OrbitSystem : System {
     static let query = EntityQuery(where: .has(OrbitComponent.self))
@@ -18,7 +19,19 @@ public struct OrbitSystem : System {
 
         for entity in entities {
             if let component = entity.components[OrbitComponent.self] {
-               print("todo")
+                let currentTime = Date().timeIntervalSince1970
+                let timeDelta =  Float(currentTime - component.startTime)
+                let timeSinceLastTrip = timeDelta - floor(timeDelta / component.roundTripTimeInSeconds)
+                let rotationAngle:Float = 2 * .pi * timeSinceLastTrip
+                let orbitsPosition = component.orbits.position
+                
+                let y = orbitsPosition.y
+                let x = cos(rotationAngle) + orbitsPosition.x
+                let z = sin(rotationAngle) + orbitsPosition.z
+                
+                entity.position = [x, y, z]
+                
+                print("todo", timeSinceLastTrip, rotationAngle)
                 
             }
             
