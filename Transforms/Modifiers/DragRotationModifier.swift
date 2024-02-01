@@ -26,7 +26,7 @@ private struct DragRotationModifier: ViewModifier {
         let dragGesture = DragGesture(minimumDistance: 0.0)
             .targetedToEntity(where: .has(DragRotateComponent.self))
         .onChanged { value in
-            let location3D = value.convert(value.location3D, from: .local, to: .scene)
+            let location3D = value.convert(value.location3D, from: .global, to: .scene)
             
             if let previousDragLocation = previousDragLocation {
                 value.entity.components[DragRotateComponent.self]?.delta = location3D - previousDragLocation
