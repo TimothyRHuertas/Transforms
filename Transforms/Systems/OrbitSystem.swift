@@ -23,8 +23,13 @@ public struct OrbitSystem : System {
                 let elapedTime =  Float(currentTime - component.startTime)
                 let timeSinceLastTrip = elapedTime - (floor(elapedTime / component.roundTripTimeInSeconds) * component.roundTripTimeInSeconds)
                 let orbitPercentage = (timeSinceLastTrip / component.roundTripTimeInSeconds)
-                let rotationAngle:Float = 2 * .pi * orbitPercentage
-                let orbitsPosition = component.orbits.position                
+                var rotationAngle:Float = 2 * .pi * orbitPercentage
+                
+                if component.clockwise == false {
+                    rotationAngle = 2 * .pi - rotationAngle
+                }
+                
+                let orbitsPosition = component.orbits.position
                 let y:Float = sin(rotationAngle) * component.radius
                 let z:Float = cos(rotationAngle) * component.radius
                 let x:Float = y * tan(component.tiltAngleInRadians)

@@ -14,10 +14,10 @@ struct OrbitView: View {
         var layout = OrbitComponentLayout.horizontal
         var tilt:Float = 0
         var gizmo2:Entity?
+        var clockwise = true
     }
     
-    @State private var orbitViewModel = OrbitViewModel()
-    @State private var tiltSliderValue:Float = 0
+    @Bindable private var orbitViewModel = OrbitViewModel()
     
     let settingsMenuTag = "settingsMenu"
 
@@ -25,20 +25,7 @@ struct OrbitView: View {
         OrbitComponent.registerComponent()
         OrbitSystem.registerSystem()
     }
-    
-    func updateGizmoOrbit() {
-        do {
-            if let gizmo2 = orbitViewModel.gizmo2, let component = gizmo2.components[OrbitComponent.self] {
-                gizmo2.components.set(try OrbitComponent(orbits: component.orbits, radius: component.radius, tiltAngleInRadians: orbitViewModel.tilt, layout: orbitViewModel.layout))
-            }
-        }
-        catch {
-            print("Unexpected error: \(error).")
-        }
-        
-        print("update")
-    }
-    
+
     var body: some View {
         RealityView {
             content, attachments in
@@ -57,7 +44,7 @@ struct OrbitView: View {
                 content.add(gizmo)
                 
                 let gizmo2 = BuildSphere.buildSphere(0.1, UIColor.gray, isDraggable: false, isRotateable: false)
-                gizmo2.components.set(try OrbitComponent(orbits: gizmo, radius: 0.8, tiltAngleInRadians: orbitViewModel.tilt, layout: orbitViewModel.layout))
+                gizmo2.components.set(try OrbitComponent(orbits: gizmo, radius: 0.8, tiltAngleInRadians: orbitViewModel.tilt, layout: orbitViewModel.layout, clockwise: orbitViewModel.clockwise))
                 
                 content.add(gizmo2)
                 
@@ -67,6 +54,15 @@ struct OrbitView: View {
                 print("Unexpected error: \(error).")
             }
             
+        }
+        update: {
+            _, _ in
+            if let gizmo2 = orbitViewModel.gizmo2, var component = gizmo2.components[OrbitComponent.self] {
+                component.tiltAngleInRadians = orbitViewModel.tilt
+                component.layout = orbitViewModel.layout
+                component.clockwise = orbitViewModel.clockwise
+                gizmo2.components.set(component)
+            }
         }
         attachments: {
             Attachment(id: settingsMenuTag) {
@@ -83,25 +79,28 @@ struct OrbitView: View {
                     Text("Tilt")
                     let tiltBound:Float = .pi/4
                     Slider(
-                        value: $tiltSliderValue,
+                        value: $orbitViewModel.tilt,
                         in: -tiltBound...tiltBound
-                    ){ editing in
-                        if editing == false {
-                            orbitViewModel.tilt = tiltSliderValue
-                        }
-                    }
+                    )
+                    
+                    Toggle(isOn: $orbitViewModel.clockwise, label: {
+                        Text("Clockwise")
+                    })
                 }
                 .padding(40)
                 .frame(width: 500)
                 .glassBackgroundEffect()
             }
         }
-        .onChange(of: orbitViewModel.layout) {
-            updateGizmoOrbit()
-        }
-        .onChange(of: orbitViewModel.tilt) {
-            updateGizmoOrbit()
-        }
+//        .onChange(of: orbitViewModel.layout) {
+//            updateGizmoOrbit()
+//        }
+//        .onChange(of: orbitViewModel.tilt) {
+//            updateGizmoOrbit()
+//        }
+//        .onChange(of: orbitViewModel.clockwise) {
+//            updateGizmoOrbit()
+//        }
         .dragRotation()
         .dragParent()
     }
