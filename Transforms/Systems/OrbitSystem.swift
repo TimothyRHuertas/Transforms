@@ -20,9 +20,9 @@ public struct OrbitSystem : System {
         for entity in entities {
             if let component = entity.components[OrbitComponent.self] {
                 let currentTime = Date().timeIntervalSince1970
-                let timeDelta =  Float(currentTime - component.startTime)
-                let timeSinceLastTrip = timeDelta - floor(timeDelta / component.roundTripTimeInSeconds)
-                let rotationAngle:Float = 2 * .pi * timeSinceLastTrip
+                let elapedTime =  Float(currentTime - component.startTime)
+                let timeSinceLastTrip = elapedTime - (floor(elapedTime / component.roundTripTimeInSeconds) * component.roundTripTimeInSeconds)
+                let rotationAngle:Float = 2 * .pi * (timeSinceLastTrip / component.roundTripTimeInSeconds)
                 let orbitsPosition = component.orbits.position
                 
                 let y = orbitsPosition.y
@@ -31,7 +31,7 @@ public struct OrbitSystem : System {
                 
                 entity.position = [x, y, z]
                 
-                print("todo", timeSinceLastTrip, rotationAngle)
+                print("todo", elapedTime, timeSinceLastTrip)
                 
             }
             

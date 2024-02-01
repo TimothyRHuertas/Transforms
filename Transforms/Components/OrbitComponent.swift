@@ -12,7 +12,7 @@ import Foundation
 public struct OrbitComponent: Component {
     let orbits:ModelEntity
     var radius:Float = 0.5
-    var roundTripTimeInSeconds:Float = 1.0
+    var roundTripTimeInSeconds:Float = 10.0
     var startTime:TimeInterval = Date().timeIntervalSince1970
     
     public init(orbits:ModelEntity) {
