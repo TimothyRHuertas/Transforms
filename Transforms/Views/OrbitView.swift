@@ -20,12 +20,13 @@ struct OrbitView: View {
     }
     
     @Bindable private var orbitViewModel = OrbitViewModel()
-    
+    @State private var speedSliderValue:Float = 3
     let settingsMenuTag = "settingsMenu"
 
     init() {
         OrbitComponent.registerComponent()
         OrbitSystem.registerSystem()
+        
     }
 
     var body: some View {
@@ -100,11 +101,16 @@ struct OrbitView: View {
                         in: 0.2...1.5
                     )
                     Spacer()
-                    Text("Round Trip Tim")
+                    Text("Round Trip Time")
                     Slider(
-                        value: $orbitViewModel.roundTripTimeInSeconds,
-                        in: 1...10
-                    )
+                        value: $speedSliderValue,
+                        in: 0.5...10
+                    ) {
+                        editing in
+                        if editing == false {
+                            orbitViewModel.roundTripTimeInSeconds = speedSliderValue
+                        }
+                    }
                     Spacer()
                 }
                 .padding(60)
