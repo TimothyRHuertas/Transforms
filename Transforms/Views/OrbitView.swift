@@ -16,13 +16,27 @@ struct OrbitView: View {
         var gizmo2:Entity?
     }
     
-    @Bindable private var orbitViewModel = OrbitViewModel()
+    @State private var orbitViewModel = OrbitViewModel()
+    @State private var tiltSliderValue:Float = 0
     
     let settingsMenuTag = "settingsMenu"
 
     init() {
         OrbitComponent.registerComponent()
         OrbitSystem.registerSystem()
+    }
+    
+    func updateGizmoOrbit() {
+        do {
+            if let gizmo2 = orbitViewModel.gizmo2, let component = gizmo2.components[OrbitComponent.self] {
+                gizmo2.components.set(try OrbitComponent(orbits: component.orbits, radius: component.radius, tiltAngleInRadians: orbitViewModel.tilt, layout: orbitViewModel.layout))
+            }
+        }
+        catch {
+            print("Unexpected error: \(error).")
+        }
+        
+        print("update")
     }
     
     var body: some View {
@@ -43,7 +57,7 @@ struct OrbitView: View {
                 content.add(gizmo)
                 
                 let gizmo2 = BuildSphere.buildSphere(0.1, UIColor.gray, isDraggable: false, isRotateable: false)
-                gizmo2.components.set(try OrbitComponent(orbits: gizmo, radius: 0.8, tiltAngleInRadians: .pi * 2 * orbitViewModel.tilt, layout: orbitViewModel.layout))
+                gizmo2.components.set(try OrbitComponent(orbits: gizmo, radius: 0.8, tiltAngleInRadians: orbitViewModel.tilt, layout: orbitViewModel.layout))
                 
                 content.add(gizmo2)
                 
@@ -54,32 +68,39 @@ struct OrbitView: View {
             }
             
         }
-        update: {
-            _, _ in
-            do {
-                if let gizmo2 = orbitViewModel.gizmo2, let component = gizmo2.components[OrbitComponent.self] {
-                    gizmo2.components.set(try OrbitComponent(orbits: component.orbits, radius: component.radius, tiltAngleInRadians: .pi * 2 * orbitViewModel.tilt, layout: orbitViewModel.layout))
-                }
-            }
-            catch {
-                print("Unexpected error: \(error).")
-            }
-            
-            print("update")
-        }
         attachments: {
             Attachment(id: settingsMenuTag) {
                 VStack {
+                    Text("Settings").font(.largeTitle)
+
                     Picker("Layout", selection: $orbitViewModel.layout) {
                         ForEach(OrbitComponentLayout.allCases) { layout in
                             Text(layout.rawValue.capitalized)
                         }
                     }
                     .pickerStyle(.segmented)
+                    
+                    Text("Tilt")
+                    let tiltBound:Float = .pi/4
+                    Slider(
+                        value: $tiltSliderValue,
+                        in: -tiltBound...tiltBound
+                    ){ editing in
+                        if editing == false {
+                            orbitViewModel.tilt = tiltSliderValue
+                        }
+                    }
                 }
                 .padding(40)
+                .frame(width: 500)
                 .glassBackgroundEffect()
             }
+        }
+        .onChange(of: orbitViewModel.layout) {
+            updateGizmoOrbit()
+        }
+        .onChange(of: orbitViewModel.tilt) {
+            updateGizmoOrbit()
         }
         .dragRotation()
         .dragParent()
