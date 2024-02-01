@@ -18,24 +18,24 @@ extension View {
 
 /// A modifier converts drag gestures into entity rotation.
 private struct DragParentModifier: ViewModifier {
-    @State private var previousDragLocation:simd_float3?
+    @State private var previousDragGesture:EntityTargetValue<DragGesture.Value>?
 
     func body(content: Content) -> some View {
         let dragGesture = DragGesture(minimumDistance: 0.0)
             .targetedToEntity(where: .has(DragParentComponent.self))
-        .onChanged { value in
-            let location3D = value.convert(value.location3D, from: .local, to: .scene)
-            
-            if let previousDragLocation = previousDragLocation {
-                value.entity.components[DragParentComponent.self]?.delta = location3D - previousDragLocation
+        .onChanged { gesture in
+            if let previousDragGesture = previousDragGesture {
+                gesture.entity.components[DragParentComponent.self]?.previousGesture = previousDragGesture
+                gesture.entity.components[DragParentComponent.self]?.currentGesture = gesture
             }
             
-            previousDragLocation = location3D
+            previousDragGesture = gesture
         }
         .onEnded {
-            value in
-            value.entity.components[DragParentComponent.self]?.delta = nil
-            previousDragLocation = nil
+            gesture in
+            gesture.entity.components[DragParentComponent.self]?.previousGesture = nil
+            gesture.entity.components[DragParentComponent.self]?.currentGesture = nil
+            previousDragGesture = nil
         }
         
         content.gesture(dragGesture)

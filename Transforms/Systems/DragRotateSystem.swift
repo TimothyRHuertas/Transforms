@@ -49,7 +49,7 @@ public struct DragRotateSystem: System {
                 
                 let diff = normalize(entityPosition - cameraPosition)
                 let axis = normalize(cross(normalize(delta), diff))
-                let angle:Float = lengthOfDrag * 6
+                let angle:Float = lengthOfDrag * 2 * .pi
 
                 entity.transform.rotation = simd_quatf(angle: angle, axis: axis) * entity.transform.rotation
                 entity.components[DragRotateComponent.self]?.previousGesture = nil

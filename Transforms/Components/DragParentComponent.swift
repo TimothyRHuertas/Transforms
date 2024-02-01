@@ -11,7 +11,8 @@ import SwiftUI
 
 public struct DragParentComponent: Component {
     var axis: Axis3D
-    var delta: simd_float3?
+    var previousGesture: EntityTargetValue<DragGesture.Value>?
+    var currentGesture: EntityTargetValue<DragGesture.Value>?
     
     public init(axis: Axis3D) {
         self.axis = axis
