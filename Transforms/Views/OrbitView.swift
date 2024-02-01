@@ -19,7 +19,7 @@ struct OrbitView: View {
             content in
             do {
                 let gizmo = BuildSphere.buildSphere(0.1, UIColor.green)
-                gizmo.position = [1, 1, -2]
+                gizmo.position = [0, 1, -2]
                 content.add(gizmo)
                 
                 let gizmo2 = BuildSphere.buildSphere(0.1, UIColor.gray, isDraggable: false, isRotateable: false)
