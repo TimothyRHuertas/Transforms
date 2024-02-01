@@ -115,5 +115,319 @@
             </Locations>
          </BreakpointContent>
       </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "B4BFC9A8-6673-432C-8CE2-91FE1713DD5E"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Transforms/Systems/DragRotateSystem.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "33"
+            endingLineNumber = "33"
+            landmarkName = "update(context:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "B4BFC9A8-6673-432C-8CE2-91FE1713DD5E - 36ad29149224b4a"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Transforms.DragRotateSystem.update(context: RealityFoundation.SceneUpdateContext) -&gt; ()"
+                  moduleName = "Transforms"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/timothyhuertas/workspace/Transforms/Transforms/Systems/DragRotateSystem.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "33"
+                  endingLineNumber = "33"
+                  offsetFromSymbolStart = "1392">
+               </Location>
+               <Location
+                  uuid = "B4BFC9A8-6673-432C-8CE2-91FE1713DD5E - dfe770ec0663157e"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (RealityKit.Entity) -&gt; Swift.Bool in Transforms.DragRotateSystem.update(context: RealityFoundation.SceneUpdateContext) -&gt; ()"
+                  moduleName = "Transforms"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/timothyhuertas/workspace/Transforms/Transforms/Systems/DragRotateSystem.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "33"
+                  endingLineNumber = "33"
+                  offsetFromSymbolStart = "644">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "E5432604-F335-4FA0-A619-4BF5D2D528ED"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Transforms/Systems/DragRotateSystem.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "41"
+            endingLineNumber = "41"
+            landmarkName = "update(context:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "E5432604-F335-4FA0-A619-4BF5D2D528ED - 36ad29149224a52"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Transforms.DragRotateSystem.update(context: RealityFoundation.SceneUpdateContext) -&gt; ()"
+                  moduleName = "Transforms"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/timothyhuertas/workspace/Transforms/Transforms/Systems/DragRotateSystem.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "41"
+                  endingLineNumber = "41"
+                  offsetFromSymbolStart = "2052">
+               </Location>
+               <Location
+                  uuid = "E5432604-F335-4FA0-A619-4BF5D2D528ED - 36ad29149224a52"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Transforms.DragRotateSystem.update(context: RealityFoundation.SceneUpdateContext) -&gt; ()"
+                  moduleName = "Transforms"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/timothyhuertas/workspace/Transforms/Transforms/Systems/DragRotateSystem.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "41"
+                  endingLineNumber = "41"
+                  offsetFromSymbolStart = "2280">
+               </Location>
+               <Location
+                  uuid = "E5432604-F335-4FA0-A619-4BF5D2D528ED - 36ad29149224a52"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Transforms.DragRotateSystem.update(context: RealityFoundation.SceneUpdateContext) -&gt; ()"
+                  moduleName = "Transforms"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/timothyhuertas/workspace/Transforms/Transforms/Systems/DragRotateSystem.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "41"
+                  endingLineNumber = "41"
+                  offsetFromSymbolStart = "2400">
+               </Location>
+               <Location
+                  uuid = "E5432604-F335-4FA0-A619-4BF5D2D528ED - 36ad29149224a52"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Transforms.DragRotateSystem.update(context: RealityFoundation.SceneUpdateContext) -&gt; ()"
+                  moduleName = "Transforms"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/timothyhuertas/workspace/Transforms/Transforms/Systems/DragRotateSystem.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "41"
+                  endingLineNumber = "41"
+                  offsetFromSymbolStart = "2516">
+               </Location>
+               <Location
+                  uuid = "E5432604-F335-4FA0-A619-4BF5D2D528ED - 36ad29149224a52"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Transforms.DragRotateSystem.update(context: RealityFoundation.SceneUpdateContext) -&gt; ()"
+                  moduleName = "Transforms"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/timothyhuertas/workspace/Transforms/Transforms/Systems/DragRotateSystem.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "41"
+                  endingLineNumber = "41"
+                  offsetFromSymbolStart = "1912">
+               </Location>
+               <Location
+                  uuid = "E5432604-F335-4FA0-A619-4BF5D2D528ED - 36ad29149224a52"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Transforms.DragRotateSystem.update(context: RealityFoundation.SceneUpdateContext) -&gt; ()"
+                  moduleName = "Transforms"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/timothyhuertas/workspace/Transforms/Transforms/Systems/DragRotateSystem.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "41"
+                  endingLineNumber = "41"
+                  offsetFromSymbolStart = "2132">
+               </Location>
+               <Location
+                  uuid = "E5432604-F335-4FA0-A619-4BF5D2D528ED - 36ad29149224a52"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Transforms.DragRotateSystem.update(context: RealityFoundation.SceneUpdateContext) -&gt; ()"
+                  moduleName = "Transforms"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/timothyhuertas/workspace/Transforms/Transforms/Systems/DragRotateSystem.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "41"
+                  endingLineNumber = "41"
+                  offsetFromSymbolStart = "2244">
+               </Location>
+               <Location
+                  uuid = "E5432604-F335-4FA0-A619-4BF5D2D528ED - 36ad29149224a52"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Transforms.DragRotateSystem.update(context: RealityFoundation.SceneUpdateContext) -&gt; ()"
+                  moduleName = "Transforms"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/timothyhuertas/workspace/Transforms/Transforms/Systems/DragRotateSystem.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "41"
+                  endingLineNumber = "41"
+                  offsetFromSymbolStart = "2352">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "709CB5FF-8348-4A7A-9B07-840B42D49F23"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Transforms/Modifiers/DragRotationModifier.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "29"
+            endingLineNumber = "29"
+            landmarkName = "body(content:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "709CB5FF-8348-4A7A-9B07-840B42D49F23 - c1468aa9caf6d834"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (_RealityKit_SwiftUI.EntityTargetValue&lt;SwiftUI.DragGesture.Value&gt;) -&gt; () in Transforms.DragRotationModifier.body(content: SwiftUI._ViewModifier_Content&lt;Transforms.DragRotationModifier&gt;) -&gt; some"
+                  moduleName = "Transforms"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/timothyhuertas/workspace/Transforms/Transforms/Modifiers/DragRotationModifier.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "29"
+                  endingLineNumber = "29"
+                  offsetFromSymbolStart = "816">
+               </Location>
+               <Location
+                  uuid = "709CB5FF-8348-4A7A-9B07-840B42D49F23 - c1468aa9caf6d834"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (_RealityKit_SwiftUI.EntityTargetValue&lt;SwiftUI.DragGesture.Value&gt;) -&gt; () in Transforms.DragRotationModifier.body(content: SwiftUI._ViewModifier_Content&lt;Transforms.DragRotationModifier&gt;) -&gt; some"
+                  moduleName = "Transforms"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/timothyhuertas/workspace/Transforms/Transforms/Modifiers/DragRotationModifier.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "29"
+                  endingLineNumber = "29"
+                  offsetFromSymbolStart = "980">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "5FF6F0C7-5F04-4E2F-AB32-A55CF784CB50"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Transforms/Modifiers/DragRotationModifier.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "30"
+            endingLineNumber = "30"
+            landmarkName = "body(content:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "FED0A368-92C9-495F-8F97-4B5410BA5908"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Transforms/Systems/DragRotateSystem.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "34"
+            endingLineNumber = "34"
+            landmarkName = "update(context:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "FED0A368-92C9-495F-8F97-4B5410BA5908 - 36ad29149224b2d"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Transforms.DragRotateSystem.update(context: RealityFoundation.SceneUpdateContext) -&gt; ()"
+                  moduleName = "Transforms"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/timothyhuertas/workspace/Transforms/Transforms/Systems/DragRotateSystem.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "34"
+                  endingLineNumber = "34"
+                  offsetFromSymbolStart = "1512">
+               </Location>
+               <Location
+                  uuid = "FED0A368-92C9-495F-8F97-4B5410BA5908 - 36ad29149224aef"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Transforms.DragRotateSystem.update(context: RealityFoundation.SceneUpdateContext) -&gt; ()"
+                  moduleName = "Transforms"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/timothyhuertas/workspace/Transforms/Transforms/Systems/DragRotateSystem.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "36"
+                  endingLineNumber = "36"
+                  offsetFromSymbolStart = "1568">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "281BA9B4-8DE7-4254-9629-A5E125BF37F8"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Transforms/Systems/DragRotateSystem.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "46"
+            endingLineNumber = "46"
+            landmarkName = "update(context:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
    </Breakpoints>
 </Bucket>
