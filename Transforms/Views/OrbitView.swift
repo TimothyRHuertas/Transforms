@@ -15,6 +15,8 @@ struct OrbitView: View {
         var tilt:Float = 0
         var gizmo2:Entity?
         var clockwise = true
+        var radius:Float = 0.8
+        var roundTripTimeInSeconds:Float = 3
     }
     
     @Bindable private var orbitViewModel = OrbitViewModel()
@@ -44,7 +46,7 @@ struct OrbitView: View {
                 content.add(gizmo)
                 
                 let gizmo2 = BuildSphere.buildSphere(0.1, UIColor.gray, isDraggable: false, isRotateable: false)
-                gizmo2.components.set(try OrbitComponent(orbits: gizmo, radius: 0.8, tiltAngleInRadians: orbitViewModel.tilt, layout: orbitViewModel.layout, clockwise: orbitViewModel.clockwise))
+                gizmo2.components.set(try OrbitComponent(orbits: gizmo, radius: orbitViewModel.radius, tiltAngleInRadians: orbitViewModel.tilt, layout: orbitViewModel.layout, clockwise: orbitViewModel.clockwise, roundTripTimeInSeconds: orbitViewModel.roundTripTimeInSeconds))
                 
                 content.add(gizmo2)
                 
@@ -61,6 +63,8 @@ struct OrbitView: View {
                 component.tiltAngleInRadians = orbitViewModel.tilt
                 component.layout = orbitViewModel.layout
                 component.clockwise = orbitViewModel.clockwise
+                component.radius = orbitViewModel.radius
+                component.roundTripTimeInSeconds = orbitViewModel.roundTripTimeInSeconds
                 gizmo2.components.set(component)
             }
         }
@@ -83,6 +87,18 @@ struct OrbitView: View {
                         in: -tiltBound...tiltBound
                     )
                     
+                    Text("Radius")
+                    Slider(
+                        value: $orbitViewModel.radius,
+                        in: 0.2...1.5
+                    )
+                    
+                    Text("Round Trip Tim")
+                    Slider(
+                        value: $orbitViewModel.roundTripTimeInSeconds,
+                        in: 1...10
+                    )
+                    
                     Toggle(isOn: $orbitViewModel.clockwise, label: {
                         Text("Clockwise")
                     })
@@ -92,15 +108,6 @@ struct OrbitView: View {
                 .glassBackgroundEffect()
             }
         }
-//        .onChange(of: orbitViewModel.layout) {
-//            updateGizmoOrbit()
-//        }
-//        .onChange(of: orbitViewModel.tilt) {
-//            updateGizmoOrbit()
-//        }
-//        .onChange(of: orbitViewModel.clockwise) {
-//            updateGizmoOrbit()
-//        }
         .dragRotation()
         .dragParent()
     }
