@@ -70,41 +70,45 @@ struct OrbitView: View {
         }
         attachments: {
             Attachment(id: settingsMenuTag) {
-                VStack {
+                VStack{
+                    Spacer()
                     Text("Settings").font(.largeTitle)
-
+                    Spacer()
                     Picker("Layout", selection: $orbitViewModel.layout) {
                         ForEach(OrbitComponentLayout.allCases) { layout in
                             Text(layout.rawValue.capitalized)
                         }
                     }
                     .pickerStyle(.segmented)
+                    Spacer()
                     
+                    Toggle(isOn: $orbitViewModel.clockwise, label: {
+                        Text("Clockwise")
+                    })
+                    Spacer()
+
                     Text("Tilt")
                     let tiltBound:Float = .pi/4
                     Slider(
                         value: $orbitViewModel.tilt,
                         in: -tiltBound...tiltBound
                     )
-                    
+                    Spacer()
                     Text("Radius")
                     Slider(
                         value: $orbitViewModel.radius,
                         in: 0.2...1.5
                     )
-                    
+                    Spacer()
                     Text("Round Trip Tim")
                     Slider(
                         value: $orbitViewModel.roundTripTimeInSeconds,
                         in: 1...10
                     )
-                    
-                    Toggle(isOn: $orbitViewModel.clockwise, label: {
-                        Text("Clockwise")
-                    })
+                    Spacer()
                 }
-                .padding(40)
-                .frame(width: 500)
+                .padding(60)
+                .frame(width: 500, height: 700)
                 .glassBackgroundEffect()
             }
         }
