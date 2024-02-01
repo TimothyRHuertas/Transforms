@@ -17,14 +17,19 @@ struct OrbitView: View {
     var body: some View {
         RealityView {
             content in
-            let gizmo = BuildSphere.buildSphere(0.1, UIColor.green)
-            gizmo.position = [1, 1, -2]
-            content.add(gizmo)
+            do {
+                let gizmo = BuildSphere.buildSphere(0.1, UIColor.green)
+                gizmo.position = [1, 1, -2]
+                content.add(gizmo)
+                
+                let gizmo2 = BuildSphere.buildSphere(0.1, UIColor.gray, isDraggable: false, isRotateable: false)
+                gizmo2.components.set(try OrbitComponent(orbits: gizmo))
+                content.add(gizmo2)
+            }
+            catch {
+                print("Unexpected error: \(error).")
+            }
             
-            let gizmo2 = BuildSphere.buildSphere(0.1, UIColor.gray, isDraggable: false, isRotateable: false)
-
-            gizmo2.components.set(OrbitComponent(orbits: gizmo))
-            content.add(gizmo2)
         }
         .dragRotation()
         .dragParent()

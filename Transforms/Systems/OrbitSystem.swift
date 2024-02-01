@@ -24,13 +24,18 @@ public struct OrbitSystem : System {
                 let timeSinceLastTrip = elapedTime - (floor(elapedTime / component.roundTripTimeInSeconds) * component.roundTripTimeInSeconds)
                 let orbitPercentage = (timeSinceLastTrip / component.roundTripTimeInSeconds)
                 let rotationAngle:Float = 2 * .pi * orbitPercentage
-                let orbitsPosition = component.orbits.position
+                let orbitsPosition = component.orbits.position                
+                let y:Float = sin(rotationAngle)
+                let z:Float = cos(rotationAngle)
+                let x:Float = y * tan(component.tiltAngleInRadians)
                 
-                let y = cos(rotationAngle) * tan(.pi / component.orbitAngleInRadians)
-                let x = cos(rotationAngle)
-                let z = sin(rotationAngle)
-                
-                entity.position = [x, y, z] + orbitsPosition
+                let position:simd_float3 = if component.layout == .horizontal {
+                    [y, -x, z]
+                } else {
+                    [x, y, z]
+                }
+
+                entity.position = position + orbitsPosition
             }
             
         }
