@@ -25,8 +25,8 @@ public struct OrbitSystem : System {
                 let orbitPercentage = (timeSinceLastTrip / component.roundTripTimeInSeconds)
                 let rotationAngle:Float = 2 * .pi * orbitPercentage
                 let orbitsPosition = component.orbits.position                
-                let y:Float = sin(rotationAngle)
-                let z:Float = cos(rotationAngle)
+                let y:Float = sin(rotationAngle) * component.radius
+                let z:Float = cos(rotationAngle) * component.radius
                 let x:Float = y * tan(component.tiltAngleInRadians)
                 
                 let position:simd_float3 = if component.layout == .horizontal {

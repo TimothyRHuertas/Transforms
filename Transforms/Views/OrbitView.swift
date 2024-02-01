@@ -23,7 +23,7 @@ struct OrbitView: View {
                 content.add(gizmo)
                 
                 let gizmo2 = BuildSphere.buildSphere(0.1, UIColor.gray, isDraggable: false, isRotateable: false)
-                gizmo2.components.set(try OrbitComponent(orbits: gizmo))
+                gizmo2.components.set(try OrbitComponent(orbits: gizmo, radius: 0.8))
                 content.add(gizmo2)
             }
             catch {

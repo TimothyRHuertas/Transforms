@@ -20,17 +20,18 @@ public struct OrbitComponent: Component {
     }
     
     let orbits:ModelEntity
-    var radius:Float = 0.5
-    var roundTripTimeInSeconds:Float = 1.5
+    var radius:Float
+    var roundTripTimeInSeconds:Float = 3
     var tiltAngleInRadians:Float
     var startTime:TimeInterval = Date().timeIntervalSince1970
     var layout = OrbitComponentLayout.horizontal
     
-    public init(orbits:ModelEntity, tiltAngleInRadians:Float = 0) throws {
+    public init(orbits:ModelEntity, radius:Float, tiltAngleInRadians:Float = 0) throws {
         if abs(tiltAngleInRadians) > .pi/4 {
             throw ValidationError.invalidTilt(message: "Error tiltAngleInRadians must be between -45 and 45. Try chaning the orientation to achieve your desired rotation.")
         }
         
+        self.radius = radius
         self.orbits = orbits
         self.tiltAngleInRadians = tiltAngleInRadians
     }
