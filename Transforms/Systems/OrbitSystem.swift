@@ -22,17 +22,15 @@ public struct OrbitSystem : System {
                 let currentTime = Date().timeIntervalSince1970
                 let elapedTime =  Float(currentTime - component.startTime)
                 let timeSinceLastTrip = elapedTime - (floor(elapedTime / component.roundTripTimeInSeconds) * component.roundTripTimeInSeconds)
-                let rotationAngle:Float = 2 * .pi * (timeSinceLastTrip / component.roundTripTimeInSeconds)
+                let orbitPercentage = (timeSinceLastTrip / component.roundTripTimeInSeconds)
+                let rotationAngle:Float = 2 * .pi * orbitPercentage
                 let orbitsPosition = component.orbits.position
                 
-                let y = orbitsPosition.y
-                let x = cos(rotationAngle) + orbitsPosition.x
-                let z = sin(rotationAngle) + orbitsPosition.z
+                let y = cos(rotationAngle) * tan(.pi / component.orbitAngleInRadians)
+                let x = cos(rotationAngle)
+                let z = sin(rotationAngle)
                 
-                entity.position = [x, y, z]
-                
-                print("todo", elapedTime, timeSinceLastTrip)
-                
+                entity.position = [x, y, z] + orbitsPosition
             }
             
         }
