@@ -11,7 +11,6 @@ import UIKit
 
 public struct DragRotateSystem: System {
     static let query = EntityQuery(where: .has(DragRotateComponent.self))
-    let sensitivity:Float = 10
 
     private let arkitSession = ARKitSession()
     private let worldTrackingProvider = WorldTrackingProvider()
@@ -31,35 +30,30 @@ public struct DragRotateSystem: System {
     }
     public func update(context: SceneUpdateContext) {
         let scene = context.scene
-        let entities = scene.performQuery(Self.query).filter({$0.components[DragRotateComponent.self]?.delta != nil})
-        if entities.isEmpty {return}
+        let entities = scene.performQuery(Self.query).filter({$0.components[DragRotateComponent.self]?.previousGesture != nil && $0.components[DragRotateComponent.self]?.currentGesture != nil})
+//        if entities.isEmpty {return}
             
         guard let deviceAnchor = worldTrackingProvider.queryDeviceAnchor(atTimestamp: CACurrentMediaTime()) else { return }
         let cameraTransform = Transform(matrix: deviceAnchor.originFromAnchorTransform)
         let cameraPosition = simd_make_float3(cameraTransform.matrix.columns.3)
 
         for entity in entities {
-            let entityPosition = entity.position(relativeTo: nil)
-            
-            if let component = entity.components[DragRotateComponent.self], let delta = component.delta {
-                let rotX = delta.x * sensitivity
-                let rotY = delta.y * sensitivity
-                let cols = cameraTransform.matrix.columns
-                let cameraUp = simd_make_float3(cols.1)
+            if let component = entity.components[DragRotateComponent.self], let previousGesture = component.previousGesture,  let currentGesture = component.currentGesture{
+                let previousLocation = previousGesture.convert(previousGesture.location3D, from: .global, to: .scene)
+                
+                let currentLocation = currentGesture.convert(currentGesture.location3D, from: .global, to: .scene)
+                
+                let delta = currentLocation - previousLocation
+                let lengthOfDrag = distance(currentLocation, previousLocation)
+                let entityPosition = entity.position(relativeTo: nil)
+                
                 let diff = normalize(entityPosition - cameraPosition)
-                let left = simd_normalize(cross(cameraUp, diff))
-                let yAxis = left.x > 0 ? -1 : 1
-                
-                if(component.rotateX) {
-                    entity.transform.rotation = simd_quatf(angle: rotX, axis: simd_float3([0, yAxis, 0])) * entity.transform.rotation
-                }
-                
-                if(component.rotateY) {
-                    entity.transform.rotation = simd_quatf(angle: rotY, axis: left) * entity.transform.rotation
+                let axis = normalize(cross(normalize(delta), diff))
+                let angle:Float = lengthOfDrag * 6
 
-                }
-                
-                entity.components[DragRotateComponent.self]?.delta = nil
+                entity.transform.rotation = simd_quatf(angle: angle, axis: axis) * entity.transform.rotation
+                entity.components[DragRotateComponent.self]?.previousGesture = nil
+                entity.components[DragRotateComponent.self]?.currentGesture = nil
             }
             
         }
